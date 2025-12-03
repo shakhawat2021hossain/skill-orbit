@@ -6,7 +6,7 @@ import WhyChooseUs from "@/components/home/why";
 
 export default function Home() {
   return (
-    <div className="max-w-7xl mx-auto">
+    <div className="">
       <Hero/>
       {/* <FeaturedCourses/> */}
       <Testimonials/>

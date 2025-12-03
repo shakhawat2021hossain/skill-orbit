@@ -25,9 +25,7 @@ export default function Footer() {
                 {/* Logo and Description */}
                 <div className="flex flex-col items-center text-center mb-8">
                     <div className="flex items-center gap-3 mb-4">
-                        <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br from-blue-600 to-purple-600">
-                            <BookOpen className="h-6 w-6 text-white" />
-                        </div>
+                        
                         <div className="text-xl font-bold text-gray-900">CourseMaster</div>
                     </div>
                     <p className="text-gray-600 max-w-md mb-6">
