@@ -1,6 +1,6 @@
 "use server";
 
-import { loginSchema } from "@/validation/auth";
+import { loginSchema } from "@/types/auth";
 
 
 export const loginAction = async (_: any, formData: FormData): Promise<any> => {
@@ -14,6 +14,7 @@ export const loginAction = async (_: any, formData: FormData): Promise<any> => {
     if (!parsed.success) {
         return {
             success: false,
+            message: "Validation failed",
             errors: parsed.error.flatten().fieldErrors
         };
     }
@@ -35,12 +36,8 @@ export const loginAction = async (_: any, formData: FormData): Promise<any> => {
     // Backend response
     const result = await res.json();
 
-    
-    console.log("result", result)
-    
-    if (!result.success) {
-        return { success: false, user: result };
-    }
 
-    return { success: true, user: result };
+    console.log("result", result)
+
+    return result
 }

@@ -1,4 +1,6 @@
-"use client"
+"use client";
+
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
@@ -8,57 +10,75 @@ import {
     FormItem,
     FormLabel,
     FormMessage,
+    FormDescription,
 } from "@/components/ui/form";
-import { Eye, EyeOff, Mail, Lock, ArrowRight } from "lucide-react";
-
+import { Eye, EyeOff, Mail, Lock, User, ArrowRight, CheckCircle } from "lucide-react";
 import { zodResolver } from "@hookform/resolvers/zod";
-
-import { LoginFormData, loginSchema } from "@/types/auth";
-import { useActionState, useEffect, useState } from "react";
+import { RegisterFormData, registerSchema } from "@/types/auth";
 import { useForm } from "react-hook-form";
-import Link from "next/link";
-import { loginAction } from "@/services/auth/login";
-import { useRouter } from "next/navigation";
+import { useActionState, useEffect } from "react";
 import { toast } from "sonner";
+import { useRouter } from "next/navigation";
+import { registerAction } from "@/services/auth/register";
 
-const LoginForm = () => {
+export default function RegisterForm() {
     const router = useRouter();
-
     const [showPassword, setShowPassword] = useState(false);
 
-    const form = useForm<LoginFormData>({
-        resolver: zodResolver(loginSchema),
+    const form = useForm<RegisterFormData>({
+        resolver: zodResolver(registerSchema),
         defaultValues: {
+            name: "",
             email: "",
             password: ""
         },
     });
 
-    const [state, formAction, isPending] = useActionState(loginAction, {
+    const [state, formAction, isPending] = useActionState(registerAction, {
         success: false,
         message: "",
         errors: {}
     });
-    console.log("state", state)
 
- 
+    console.log("state:", state)
 
     useEffect(() => {
         if (state.success) {
-            toast.success(state.message || "Login successful!");
+            toast.success(state.message || "Registration successful!");
             
         } else if (state.message && !state.success) {
-            toast.error(state.message || "Login failed");
+            toast.error(state.message || "Registration failed");
         }
     }, [state]);
 
-
-
     return (
         <>
-            {/* Login Form */}
             <Form {...form}>
                 <form action={formAction} className="space-y-6">
+                    <FormField
+                        control={form.control}
+                        name="name"
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel>Full name</FormLabel>
+                                <FormControl>
+                                    <div className="relative">
+                                        <User className="absolute left-3 top-1/2 h-5 w-5 -translate-y-1/2 text-gray-400" />
+                                        <Input
+                                            placeholder="John Doe"
+                                            className="pl-10"
+                                            {...field}
+                                            disabled={isPending}
+                                        />
+                                    </div>
+                                </FormControl>
+                                <FormMessage>
+                                    {state?.errors?.name?.[0]}
+                                </FormMessage>
+                            </FormItem>
+                        )}
+                    />
+
                     <FormField
                         control={form.control}
                         name="email"
@@ -79,7 +99,6 @@ const LoginForm = () => {
                                 <FormMessage>
                                     {state?.errors?.email?.[0]}
                                 </FormMessage>
-
                             </FormItem>
                         )}
                     />
@@ -89,15 +108,7 @@ const LoginForm = () => {
                         name="password"
                         render={({ field }) => (
                             <FormItem>
-                                <div className="flex items-center justify-between">
-                                    <FormLabel>Password</FormLabel>
-                                    <Link
-                                        href="/forgot-password"
-                                        className="text-sm text-blue-600 hover:text-blue-800"
-                                    >
-                                        Forgot password?
-                                    </Link>
-                                </div>
+                                <FormLabel>Password</FormLabel>
                                 <FormControl>
                                     <div className="relative">
                                         <Lock className="absolute left-3 top-1/2 h-5 w-5 -translate-y-1/2 text-gray-400" />
@@ -131,6 +142,7 @@ const LoginForm = () => {
                     />
 
 
+
                     <Button
                         type="submit"
                         className="w-full bg-linear-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700"
@@ -139,11 +151,11 @@ const LoginForm = () => {
                         {isPending ? (
                             <div className="flex items-center">
                                 <div className="h-5 w-5 animate-spin rounded-full border-2 border-white border-t-transparent" />
-                                <span className="ml-2">Signing in...</span>
+                                <span className="ml-2">Creating account...</span>
                             </div>
                         ) : (
                             <>
-                                Sign in
+                                Create Account
                                 <ArrowRight className="ml-2 h-4 w-4" />
                             </>
                         )}
@@ -152,6 +164,4 @@ const LoginForm = () => {
             </Form>
         </>
     );
-};
-
-export default LoginForm;
+}
