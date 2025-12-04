@@ -3,8 +3,6 @@
 import { loginSchema } from "@/types/auth";
 import { cookies } from "next/headers";
 import { parse } from "cookie";
-import jwt, { JwtPayload } from "jsonwebtoken";
-
 
 
 
@@ -40,15 +38,15 @@ export const loginAction = async (_: any, formData: FormData): Promise<any> => {
 
     const tokens = res.headers.getSetCookie()
     const parsedCookie = parse(tokens[0]);
-    
-    
+
+
     if (parsedCookie['accessToken']) {
         accessTokenObject = parsedCookie;
     }
-    
-    
+
+
     // console.log("accessToken", parsedCookie.accessToken)
-    
+
     const cookieStore = await cookies();
 
     cookieStore.set("accessToken", accessTokenObject.accessToken, {
