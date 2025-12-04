@@ -3,7 +3,10 @@ import { NextRequest } from "next/server";
 
 export async function proxy(req: NextRequest) {
     const accessToken = req.cookies.get("accessToken")?.value;
-    console.log(accessToken)
+    const path = req.nextUrl.pathname
+
+    // console.log(accessToken)
+    console.log("path:", path)
     if (accessToken) {
         try {
             const decode = jwt.verify(
@@ -18,5 +21,12 @@ export async function proxy(req: NextRequest) {
         }
     }
 
+
+}
+
+export const config = {
+    matcher: [
+        '/((?!api|_next/static|_next/image|favicon.ico|sitemap.xml|robots.txt).*)',
+    ],
 
 }
