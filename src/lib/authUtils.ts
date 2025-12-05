@@ -1,7 +1,4 @@
-export enum UserRole {
-    ADMIN = "ADMIN",
-    STUDENT = "STUDENT",
-}
+import { UserRole } from "@/types/user";
 
 export type RouteConfig = {
     exact: string[],

@@ -1,6 +1,7 @@
 import jwt, { JwtPayload } from "jsonwebtoken";
 import { NextRequest, NextResponse } from "next/server";
-import { canRoleAccessRoute, getDefaultDashboardRoute, getRouteOwner, isAuthRoute, UserRole } from "./lib/authUtils";
+import { canRoleAccessRoute, getDefaultDashboardRoute, getRouteOwner, isAuthRoute } from "./lib/authUtils";
+import { UserRole } from "./types/user";
 
 export async function proxy(req: NextRequest) {
     const accessToken = req.cookies.get("accessToken")?.value || null;

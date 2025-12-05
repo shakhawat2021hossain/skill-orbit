@@ -1,0 +1,21 @@
+
+export enum UserRole {
+    ADMIN = "ADMIN",
+    STUDENT = "STUDENT",
+}
+
+
+
+export interface IUser {
+    _id: string;
+    name: string;
+    email: string;
+    password: string;
+    role: UserRole;
+    phone?: string;
+    picture?: string;
+    isDeleted?: boolean;
+    address?: string;
+    isBlocked?: boolean; 
+    institute?:string
+}

@@ -1,0 +1,43 @@
+"use server";
+
+import { serverFetch } from "@/lib/serverFetch";
+import { IUser } from "@/types/user";
+import { cookies } from "next/headers";
+
+export const getCookie = async (key: string) => {
+    const cookieStore = await cookies();
+    return cookieStore.get(key)?.value || null;
+};
+
+export const getUserInfo = async (): Promise<IUser | null> => {
+    try {
+        // Read access token
+        const token = await getCookie("accessToken");
+
+        if (!token) {
+            console.log("No access token found.");
+            return null;
+        }
+
+        const response = await serverFetch.get("/user/me", {
+            // headers: {
+            //     Authorization: `${token}`,
+            // },
+            cache: "force-cache",
+            next: { tags: ["user-info"] },
+        });
+
+        if (!response.ok) {
+            console.log("User info fetch failed", await response.text());
+            return null;
+        }
+
+        const result = await response.json();
+        console.log("user res", result);
+
+        return result?.data || result?.user || result || null;
+    } catch (error) {
+        console.log("Error fetching user info:", error);
+        return null;
+    }
+};
