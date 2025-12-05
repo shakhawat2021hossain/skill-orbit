@@ -18,4 +18,5 @@ export interface IUser {
     address?: string;
     isBlocked?: boolean; 
     institute?:string
+    createdAt: Date;
 }

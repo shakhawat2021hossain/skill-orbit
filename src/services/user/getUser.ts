@@ -18,11 +18,11 @@ export const getUserInfo = async (): Promise<IUser | null> => {
             console.log("No access token found.");
             return null;
         }
-
+        console.log("getting user")
         const response = await serverFetch.get("/user/me", {
-            // headers: {
-            //     Authorization: `${token}`,
-            // },
+            headers: {
+                Authorization: `${token}`,
+            },
             cache: "force-cache",
             next: { tags: ["user-info"] },
         });
