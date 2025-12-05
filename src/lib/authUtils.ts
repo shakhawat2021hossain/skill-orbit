@@ -1,4 +1,3 @@
-// auth-utils.ts
 export enum UserRole {
     ADMIN = "ADMIN",
     STUDENT = "STUDENT",
@@ -9,10 +8,7 @@ export type RouteConfig = {
     patterns: RegExp[],
 }
 
-
-/* ----------------------------------------
-   Public Auth Routes (no login required)
----------------------------------------- */
+// public auth routes
 export const authRoutes = [
     "/login",
     "/register",
