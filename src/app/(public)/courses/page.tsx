@@ -5,7 +5,6 @@ import { BookOpen, Clock, Users, Star, ArrowRight } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { getCourses } from "@/services/course/getCourses";
-import { ICourse } from "@/types/course";
 
 
 
@@ -116,7 +115,7 @@ export default async function CoursesPage() {
                                 </div>
                             </CardContent>
 
-                            <CardFooter className="p-6 pt-0">
+                            <CardFooter className="">
                                 <Button className="w-full bg-blue-600 hover:bg-blue-700" asChild>
                                     <Link href={`/courses/${course._id}`}>
                                         View Course

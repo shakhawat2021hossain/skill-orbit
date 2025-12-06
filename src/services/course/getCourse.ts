@@ -3,10 +3,11 @@
 import { serverFetch } from "@/lib/serverFetch";
 import { ICourse } from "@/types/course";
 
-export const getCourses = async (): Promise<ICourse[] | null> => {
+export const getCourse = async (id: string): Promise<ICourse | null> => {
+    console.log("id", id)
     try {
-        const res = await serverFetch.get("/course/all");
-        // console.log(" res", res);
+        const res = await serverFetch.get(`/course/${id}`);
+        console.log(" res", res);
 
         if (!res.ok) {
             console.log("courses fetch failed");
@@ -14,9 +15,9 @@ export const getCourses = async (): Promise<ICourse[] | null> => {
         }
 
         const result = await res.json();
-        // console.log("course res", result);
+        console.log("course res", result);
 
-        return result?.data || result || null;
+        return result?.data[0] || result || null;
     } catch (error) {
         console.log("Error fetching user info:", error);
         return null;
