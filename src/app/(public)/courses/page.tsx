@@ -4,94 +4,19 @@ import { Badge } from "@/components/ui/badge";
 import { BookOpen, Clock, Users, Star, ArrowRight } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
+import { getCourses } from "@/services/course/getCourses";
+import { ICourse } from "@/types/course";
 
-// Mock courses data based on your schema
-const courses = [
-    {
-        _id: "1",
-        title: "Complete Web Development Bootcamp",
-        description: "Learn full-stack web development with React, Node.js, MongoDB, and modern tools.",
-        price: 89.99,
-        category: "Web Development",
-        instructor: "Sarah Johnson",
-        thumbnail: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=400&h=225&fit=crop",
-        tags: ["React", "Node.js", "MongoDB"],
-        totalDuration: 2520, // 42 hours in minutes
-        students: Array(45000).fill(""),
-        rating: 4.9,
-    },
-    {
-        _id: "2",
-        title: "Python & Data Science Masterclass",
-        description: "Master Python programming, data analysis, and machine learning with hands-on projects.",
-        price: 99.99,
-        category: "Data Science",
-        instructor: "Dr. Michael Chen",
-        thumbnail: "https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=400&h=225&fit=crop",
-        tags: ["Python", "Machine Learning", "Data"],
-        totalDuration: 3360, // 56 hours
-        students: Array(32000).fill(""),
-        rating: 4.8,
-    },
-    {
-        _id: "3",
-        title: "UI/UX Design Fundamentals",
-        description: "Learn user-centered design principles, wireframing, and prototyping.",
-        price: 79.99,
-        category: "Design",
-        instructor: "Emma Wilson",
-        thumbnail: "https://images.unsplash.com/photo-1551650975-87deedd944c3?w=400&h=225&fit=crop",
-        tags: ["Figma", "UX Research", "Design"],
-        totalDuration: 2160, // 36 hours
-        students: Array(28000).fill(""),
-        rating: 4.7,
-    },
-    {
-        _id: "4",
-        title: "Digital Marketing Strategy",
-        description: "Comprehensive guide to digital marketing including SEO and social media.",
-        price: 69.99,
-        category: "Marketing",
-        instructor: "Alex Rodriguez",
-        thumbnail: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=225&fit=crop",
-        tags: ["SEO", "Social Media", "Marketing"],
-        totalDuration: 1680, // 28 hours
-        students: Array(35000).fill(""),
-        rating: 4.6,
-    },
-    {
-        _id: "5",
-        title: "React Native Mobile Development",
-        description: "Build cross-platform mobile applications with React Native and Expo.",
-        price: 94.99,
-        category: "Mobile Development",
-        instructor: "James Miller",
-        thumbnail: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=400&h=225&fit=crop",
-        tags: ["React Native", "Mobile", "JavaScript"],
-        totalDuration: 2280, // 38 hours
-        students: Array(29000).fill(""),
-        rating: 4.9,
-    },
-    {
-        _id: "6",
-        title: "Cloud Computing with AWS",
-        description: "Master AWS services including EC2, S3, Lambda, and RDS.",
-        price: 109.99,
-        category: "Cloud Computing",
-        instructor: "Lisa Taylor",
-        thumbnail: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=400&h=225&fit=crop",
-        tags: ["AWS", "Cloud", "DevOps"],
-        totalDuration: 2640, // 44 hours
-        students: Array(27000).fill(""),
-        rating: 4.8,
-    },
-];
 
-export default function CoursesPage() {
+
+export default async function CoursesPage() {
     const formatDuration = (minutes: number) => {
         const hours = Math.floor(minutes / 60);
         return `${hours} hours`;
     };
+
+    const courses = await getCourses()
+    console.log(courses)
 
     return (
         <div className="min-h-screen bg-gray-50">
@@ -110,7 +35,7 @@ export default function CoursesPage() {
                 <div className="flex items-center justify-between mb-8">
                     <div>
                         <h2 className="text-2xl font-bold text-gray-900">
-                            {courses.length} Courses Available
+                            {courses?.length} Courses Available
                         </h2>
                         <p className="text-gray-600">Start learning today</p>
                     </div>
@@ -123,12 +48,12 @@ export default function CoursesPage() {
 
                 {/* Courses Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {courses.map((course) => (
+                    {courses && courses.map((course) => (
                         <Card key={course._id} className="overflow-hidden hover:shadow-lg transition-shadow">
                             {/* Course Image */}
                             <div className="relative h-48">
                                 <Image
-                                    src={course.thumbnail}
+                                    src={course.thumbnail as string}
                                     alt={course.title}
                                     fill
                                     className="object-cover"
@@ -160,21 +85,21 @@ export default function CoursesPage() {
                                 <div className="flex items-center justify-between text-sm text-gray-500 mb-4">
                                     <div className="flex items-center">
                                         <Clock className="h-4 w-4 mr-1" />
-                                        {formatDuration(course.totalDuration)}
+                                        {formatDuration(course?.totalDuration || 150)}
                                     </div>
                                     <div className="flex items-center">
                                         <Users className="h-4 w-4 mr-1" />
-                                        {course.students.length.toLocaleString()} students
+                                        {course?.students?.length.toLocaleString() || 10} students
                                     </div>
                                     <div className="flex items-center">
                                         <Star className="h-4 w-4 text-yellow-500 fill-yellow-500 mr-1" />
-                                        {course.rating}
+                                        {course?.rating || 4.8}
                                     </div>
                                 </div>
 
                                 {/* Tags */}
                                 <div className="flex flex-wrap gap-2 mb-4">
-                                    {course.tags.map((tag) => (
+                                    {course?.tags?.map((tag) => (
                                         <Badge key={tag} variant="outline" className="text-xs">
                                             {tag}
                                         </Badge>
@@ -205,7 +130,7 @@ export default function CoursesPage() {
 
                 {/* CTA */}
                 <div className="mt-12 text-center">
-                    <div className="bg-gradient-to-r from-blue-50 to-purple-50 rounded-xl p-8 border">
+                    <div className="bg-linear-to-r from-blue-50 to-purple-50 rounded-xl p-8 border">
                         <h3 className="text-2xl font-bold text-gray-900 mb-4">
                             Start Learning Today
                         </h3>
