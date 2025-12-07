@@ -6,7 +6,7 @@ const testimonials = [
     name: "Alex Johnson",
     role: "Software Engineer",
     company: "Google",
-    content: "CourseMaster transformed my career. The web development course gave me the skills I needed to land my dream job at Google.",
+    content: "skillorbit transformed my career. The web development course gave me the skills I needed to land my dream job at Google.",
     rating: 5,
     initials: "AJ",
   },

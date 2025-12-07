@@ -21,7 +21,7 @@ const contactInfo = [
     {
         icon: Mail,
         title: "Email Support",
-        details: ["support@coursemaster.com", "sales@coursemaster.com"],
+        details: ["support@skillorbit.com", "sales@skillorbit.com"],
         description: "We respond within 24 hours",
     },
     {

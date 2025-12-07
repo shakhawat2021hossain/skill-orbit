@@ -67,7 +67,7 @@ const team = [
 ];
 
 const milestones = [
-    { year: "2020", title: "Founded", description: "CourseMaster was born with a vision to democratize education" },
+    { year: "2020", title: "Founded", description: "skillorbit was born with a vision to democratize education" },
     { year: "2021", title: "First 100K Students", description: "Reached our first major milestone in student enrollment" },
     { year: "2022", title: "Mobile App Launch", description: "Released our iOS and Android learning apps" },
     { year: "2023", title: "Global Expansion", description: "Expanded to serve learners in 190+ countries" },
@@ -80,7 +80,7 @@ export default function AboutPage() {
             {/* Hero Section */}
             <div className="bg-linear-to-r from-blue-200 to-purple-200 py-16">
                 <div className="container mx-auto px-4 text-center">
-                    <h1 className="text-4xl md:text-5xl font-bold mb-6">About CourseMaster</h1>
+                    <h1 className="text-4xl md:text-5xl font-bold mb-6">About skillorbit</h1>
                     <p className="text-xl text-gray-500 max-w-3xl mx-auto mb-8">
                         We're on a mission to make quality education accessible to everyone,
                         helping learners worldwide transform their careers and lives.
@@ -149,7 +149,7 @@ export default function AboutPage() {
                             <h2 className="text-3xl font-bold text-gray-900 mb-6">Our Story</h2>
                             <div className="space-y-4 text-gray-600">
                                 <p>
-                                    Founded in 2020, CourseMaster began with a simple idea: quality education should be
+                                    Founded in 2020, skillorbit began with a simple idea: quality education should be
                                     accessible to everyone, regardless of location or background.
                                 </p>
                                 <p>
@@ -170,7 +170,7 @@ export default function AboutPage() {
                         <div className="md:w-1/2">
                             <div className="bg-linear-to-br from-blue-500 to-purple-500 rounded-2xl p-8 text-white">
                                 <div className="space-y-6">
-                                    <h3 className="text-2xl font-bold">Why Choose CourseMaster?</h3>
+                                    <h3 className="text-2xl font-bold">Why Choose skillorbit?</h3>
                                     {[
                                         "Industry-recognized certificates",
                                         "Learn from expert instructors",

@@ -45,7 +45,7 @@ export default function PublicNavbar({ accessToken }: { accessToken: string | nu
           {/* Logo */}
           <div className="flex items-center gap-3">
             <Link href="/" className="flex items-center gap-3">
-              <div className="text-xl font-bold">CourseMaster</div>
+              <div className="text-xl font-bold">skillorbit</div>
             </Link>
 
             {/* Desktop Navigation */}
@@ -138,7 +138,7 @@ export default function PublicNavbar({ accessToken }: { accessToken: string | nu
                 <div className="flex flex-col h-full py-6">
                   {/* Mobile Logo */}
                   <div className="px-4 mb-8">
-                    <div className="text-xl font-bold text-gray-900">CourseMaster</div>
+                    <div className="text-xl font-bold text-gray-900">skillorbit</div>
                   </div>
 
                   {/* Mobile Search */}
