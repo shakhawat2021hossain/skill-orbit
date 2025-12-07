@@ -15,6 +15,8 @@ import {
   DropdownMenuItem,
   DropdownMenuSeparator,
 } from "@/components/ui/dropdown-menu";
+import { deleteCookie } from "../auth/handleToken";
+import { IUser, UserRole } from "@/types/user";
 
 const navLinks = [
   { name: "Home", href: "/" },
@@ -23,7 +25,25 @@ const navLinks = [
   { name: "Contact", href: "/contact" },
 ];
 
-export default function PublicNavbar({ accessToken }: { accessToken: string | null }) {
+const authenticatedRoutes = {
+  STUDENT: [
+    { name: "Dashboard", href: "/dashboard" },
+    { name: "Profile", href: "/profile" },
+
+  ],
+  INSTRUCTOR: [
+    { name: "Dashboard", href: "/instructor/dashboard" },
+    { name: "Profile", href: "/profile" },
+
+  ],
+  ADMIN: [
+    { name: "Dashboard", href: "/admin/dashboard" },
+    { name: "Profile", href: "/profile" },
+
+  ],
+}
+
+export default function PublicNavbar({ accessToken, user }: { accessToken: string | null, user: IUser | null }) {
   const [isScrolled, setIsScrolled] = useState(false);
   const pathname = usePathname();
 
@@ -34,6 +54,8 @@ export default function PublicNavbar({ accessToken }: { accessToken: string | nu
 
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+
 
   return (
     <header
@@ -56,8 +78,8 @@ export default function PublicNavbar({ accessToken }: { accessToken: string | nu
                   variant="ghost"
                   size="sm"
                   className={`${pathname === link.href
-                      ? "bg-blue-50 text-blue-600"
-                      : "text-gray-600 hover:text-gray-900"
+                    ? "bg-blue-50 text-blue-600"
+                    : "text-gray-600 hover:text-gray-900"
                     }`}
                   asChild
                 >
@@ -96,24 +118,30 @@ export default function PublicNavbar({ accessToken }: { accessToken: string | nu
                   </DropdownMenuTrigger>
 
                   <DropdownMenuContent align="end" className="w-48">
-                    <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                    <DropdownMenuLabel>{user?.name}</DropdownMenuLabel>
                     <DropdownMenuSeparator />
 
-                    <DropdownMenuItem asChild>
+                    {/* <DropdownMenuItem asChild>
                       <Link href="/dashboard">Dashboard</Link>
                     </DropdownMenuItem>
                     <DropdownMenuItem asChild>
                       <Link href="/profile">Profile</Link>
-                    </DropdownMenuItem>
-                    <DropdownMenuItem asChild>
+                    </DropdownMenuItem> */}
+                    {
+                      user &&
+                      authenticatedRoutes[user?.role].map(route => <DropdownMenuItem key={route.href} asChild>
+                        <Link href={route.href}>{route.name}</Link>
+                      </DropdownMenuItem>)
+                    }
+                    {/* <DropdownMenuItem asChild>
                       <Link href="/my-courses">My Courses</Link>
-                    </DropdownMenuItem>
+                    </DropdownMenuItem> */}
 
                     <DropdownMenuSeparator />
 
                     <DropdownMenuItem
-                      onClick={() => {
-                        document.cookie = "accessToken=; Max-Age=0; path=/";
+                      onClick={async () => {
+                        await deleteCookie("accessToken")
                         window.location.reload();
                       }}
                     >
@@ -160,8 +188,8 @@ export default function PublicNavbar({ accessToken }: { accessToken: string | nu
                         key={link.name}
                         href={link.href}
                         className={`flex items-center px-3 py-3 rounded-lg mb-1 ${pathname === link.href
-                            ? "bg-blue-50 text-blue-600"
-                            : "text-gray-700 hover:bg-gray-50"
+                          ? "bg-blue-50 text-blue-600"
+                          : "text-gray-700 hover:bg-gray-50"
                           }`}
                       >
                         {link.name}
@@ -188,15 +216,13 @@ export default function PublicNavbar({ accessToken }: { accessToken: string | nu
                         <Button className="w-full" asChild>
                           <Link href="/profile">Profile</Link>
                         </Button>
-                        <Button className="w-full" asChild>
-                          <Link href="/my-courses">My Courses</Link>
-                        </Button>
+
 
                         <Button
                           variant="destructive"
                           className="w-full"
-                          onClick={() => {
-                            document.cookie = "accessToken=; Max-Age=0; path=/";
+                          onClick={async () => {
+                            await deleteCookie("accessToken")
                             window.location.reload();
                           }}
                         >

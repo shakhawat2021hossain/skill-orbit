@@ -30,36 +30,39 @@ export async function proxy(req: NextRequest) {
         }
     }
 
+    // If accessing auth routes while logged in, redirect to dashboard
     if (isAuthRoute(path)) {
         if (accessToken && user?.role) {
             url.pathname = getDefaultDashboardRoute(user.role as UserRole);
             return NextResponse.redirect(url);
         }
         return NextResponse.next(); // allow login/register for guests
-
     }
 
+    // Check if route requires authentication
     const owner = getRouteOwner(path);
     if (owner === null) {
         return NextResponse.next(); // Allow public pages
     }
 
-
+    // Protected route - must be logged in
     if (!accessToken) {
         url.pathname = "/login";
         url.searchParams.set("redirect", path);
         return NextResponse.redirect(url);
     }
 
-
-
-
+    // Check role-based access
     const role = user?.role as UserRole;
-
-    if (!canRoleAccessRoute(path, role)) {
+    const canAccess = canRoleAccessRoute(path, role);
+    console.log(`[AUTH] Path: ${path}, Role: ${role}, Owner: ${getRouteOwner(path)}, CanAccess: ${canAccess}`);
+    
+    if (!canAccess) {
         url.pathname = getDefaultDashboardRoute(role);
         return NextResponse.redirect(url);
     }
+
+    return NextResponse.next(); // Allow access
 
 }
 

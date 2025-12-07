@@ -18,7 +18,7 @@ export const getUserInfo = async (): Promise<IUser | null> => {
             console.log("No access token found.");
             return null;
         }
-        console.log("getting user")
+        // console.log("getting user")
         const response = await serverFetch.get("/user/me", {
             headers: {
                 Authorization: `${token}`,
@@ -33,7 +33,7 @@ export const getUserInfo = async (): Promise<IUser | null> => {
         }
 
         const result = await response.json();
-        console.log("user res", result);
+        // console.log("user res", result);
 
         return result?.data || result?.user || result || null;
     } catch (error) {
