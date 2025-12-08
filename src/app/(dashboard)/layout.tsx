@@ -1,7 +1,6 @@
+import DashboardSidebar from "@/components/dashboard/DashboardSidebar";
 import { getUserInfo } from "@/services/user/getUser";
 import { redirect } from "next/navigation";
-import DashboardSidebar from "@/components/dashboard/DashboardSidebar";
-
 export default async function DashboardLayout({
   children,
 }: {

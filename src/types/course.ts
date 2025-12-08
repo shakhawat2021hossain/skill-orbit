@@ -1,3 +1,5 @@
+import z from "zod";
+
 export enum Category {
     WEB_DEVELOPMENT = "Web Development",
     PROGRAMMING = "Programming",
@@ -31,3 +33,23 @@ export interface ICourse {
     students?: string[];
     rating?: string;
 }
+
+export const courseSchema = z.object({
+  title: z.string().min(1, "Title is required"),
+  description: z.string().min(1, "Description is required"),
+  price: z.number().min(0, "Price must be a positive number"),
+  category: z.nativeEnum(Category),
+  instructor: z.string().min(1, "Instructor is required"),
+//   tags: z.array(z.string()).default([]),
+});
+// export const courseSchema = z.object({
+//     title: z.string().min(5),
+//     description: z.string().min(20),
+//     price: z.coerce.number().min(0),
+//     category: z.nativeEnum(Category),
+//     instructor: z.string().min(2),
+//     tags: z.array(z.string()).default([]),
+// });
+
+
+export type CourseFormData = z.infer<typeof courseSchema>;

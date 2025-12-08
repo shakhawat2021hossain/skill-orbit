@@ -1,12 +1,9 @@
 "use server";
 
+import { getCookie } from "@/components/auth/handleToken";
 import { serverFetch } from "@/lib/serverFetch";
-import { cookies } from "next/headers";
 
-export const getCookie = async (key: string) => {
-	const cookieStore = await cookies();
-	return cookieStore.get(key)?.value || null;
-};
+
 
 export const addCourse = async (payload: any): Promise<any | null> => {
 	try {
