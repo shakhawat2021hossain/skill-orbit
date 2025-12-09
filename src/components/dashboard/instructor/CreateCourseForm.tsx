@@ -88,7 +88,7 @@ export default function CreateCourse() {
                 </div>
 
                 <Card className="border shadow-sm mx-20">
-                    <CardHeader className="bg-gradient-to-r from-blue-50 to-white border-b">
+                    <CardHeader className="bg-linear-to-r from-blue-50 to-white border-b">
                         <div className="flex items-center gap-3">
                             <div className="h-10 w-10 rounded-lg bg-blue-100 flex items-center justify-center">
                                 <FileText className="h-5 w-5 text-blue-600" />
@@ -237,7 +237,7 @@ export default function CreateCourse() {
                                     <div className="flex flex-col sm:flex-row gap-4">
                                         <Button
                                             type="submit"
-                                            className="flex-1 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 h-12 text-base"
+                                            className="flex-1 bg-linear-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 h-12 text-base"
                                             disabled={isPending}
                                         >
                                             {isPending ? (
