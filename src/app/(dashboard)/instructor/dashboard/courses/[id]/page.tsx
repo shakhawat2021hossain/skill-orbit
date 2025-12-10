@@ -3,9 +3,9 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import AddLessonModal from "@/services/instructor/manageCourse/AddLesson";
-import AddResourceModal from "@/services/instructor/manageCourse/AddResource";
-import AddTagModal from "@/services/instructor/manageCourse/AddTag";
+import AddLessonModal from "@/components/dashboard/instructor/manageCourse/AddLesson";
+import AddResourceModal from "@/components/dashboard/instructor/manageCourse/AddResource";
+import AddTagModal from "@/components/dashboard/instructor/manageCourse/AddTag";
 import {
     Clock,
     FileText,
@@ -19,7 +19,7 @@ import {
     PlayCircle,
     X
 } from "lucide-react";
-import CourseStats from "@/services/instructor/manageCourse/CourseStats";
+import CourseStats from "@/components/dashboard/instructor/manageCourse/CourseStats";
 
 export default async function InstructorCourseDetailsPage({
     params,

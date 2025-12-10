@@ -7,8 +7,6 @@ export interface CreateLessonPayload {
   title: string;
   duration?: number; // minutes
   videoUrl?: string;
-  resources?: { title: string; link: string }[];
-  description?: string;
 }
 
 export const createLesson = async (
