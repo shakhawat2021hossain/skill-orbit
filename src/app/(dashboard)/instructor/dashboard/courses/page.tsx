@@ -6,11 +6,12 @@ import { Button } from "@/components/ui/button";
 import { Plus, BookOpen } from "lucide-react";
 import Link from "next/link";
 import { getInsCourses } from "@/services/course/getInsCourses";
-import CourseCard from "@/components/dashboard/instructor/CourseCard";
 
 const InstructorCourses = () => {
     const [courses, setCourses] = useState<ICourse[]>([]);
     const [loading, setLoading] = useState(true);
+
+
 
     useEffect(() => {
         fetchCourses();

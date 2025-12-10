@@ -9,12 +9,14 @@ export const deleteLesson = async (
 ): Promise<boolean> => {
   try {
     const token = await getCookie("accessToken");
+    // console.log("courseId", courseId, lessonId)
 
     const res = await serverFetch.delete(`/lesson/${courseId}/${lessonId}`, {
       headers: {
         ...(token ? { Authorization: `${token}` } : {}),
       },
     });
+    // console.log("res", res)
 
     if (!res.ok) {
       console.log("deleteLesson failed", await res.text());
