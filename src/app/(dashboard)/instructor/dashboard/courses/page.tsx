@@ -103,11 +103,80 @@ const InstructorCourses = () => {
                     </div>
 
                     {/* Courses Grid */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {/* <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                         {courses.map((course) => (
                             <CourseCard key={course._id} course={course} />
                         ))}
+                    </div> */}
+                    {/* Courses Table */}
+                    <div className="overflow-x-auto rounded-lg border">
+                        <table className="w-full text-sm">
+                            <thead className="bg-muted">
+                                <tr>
+                                    <th className="p-4 text-left font-semibold">Course</th>
+                                    <th className="p-4 text-left font-semibold">Category</th>
+                                    <th className="p-4 text-left font-semibold">Students</th>
+                                    <th className="p-4 text-left font-semibold">Price</th>
+                                    {/* <th className="p-4 text-left font-semibold">Revenue</th> */}
+                                    <th className="p-4 text-right font-semibold">Actions</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                {courses.map((course) => (
+                                    <tr
+                                        key={course._id}
+                                        className="border-t hover:bg-muted/40 transition-colors"
+                                    >
+                                        {/* Thumbnail + Title */}
+                                        <td className="p-4 flex items-center gap-3">
+                                            <img
+                                                src={course.thumbnail}
+                                                alt={course.title}
+                                                className="w-14 h-14 object-cover rounded-md"
+                                            />
+                                            <div>
+                                                <p className="font-medium">{course.title}</p>
+                                                <p className="text-xs text-muted-foreground line-clamp-1">
+                                                    {course.description}
+                                                </p>
+                                            </div>
+                                        </td>
+
+                                        {/* Category */}
+                                        <td className="p-4">
+                                            <span className="text-muted-foreground">{course.category}</span>
+                                        </td>
+
+                                        {/* Students */}
+                                        <td className="p-4">
+                                            {course.students?.length || 0}
+                                        </td>
+
+                                        {/* Price */}
+                                        <td className="p-4">
+                                            ${course.price}
+                                        </td>
+
+                                        {/* Revenue */}
+                                        {/* <td className="p-4">
+                                            ${course?.revenue || 0}
+                                        </td> */}
+
+                                        {/* Action Button */}
+                                        <td className="p-4 text-right">
+                                            <Button asChild variant="outline" size="sm">
+                                                <Link href={`/instructor/dashboard/courses/${course._id}`}>
+                                                    View
+                                                </Link>
+                                            </Button>
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
                     </div>
+
                 </>
             )}
         </div>

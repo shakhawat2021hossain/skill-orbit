@@ -1,13 +1,25 @@
-
 import { getCourse } from "@/services/course/getCourse";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Separator } from "@/components/ui/separator";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import AddLessonModal from "@/services/instructor/manageCourse/AddLesson";
 import AddResourceModal from "@/services/instructor/manageCourse/AddResource";
 import AddTagModal from "@/services/instructor/manageCourse/AddTag";
+import {
+    Clock,
+    FileText,
+    Video,
+    Tag,
+    Settings,
+    BookOpen,
+    ExternalLink,
+    Edit2,
+    Trash2,
+    PlayCircle,
+    X
+} from "lucide-react";
+import CourseStats from "@/services/instructor/manageCourse/CourseStats";
 
 export default async function InstructorCourseDetailsPage({
     params,
@@ -19,89 +31,106 @@ export default async function InstructorCourseDetailsPage({
 
     if (!course) return <div>No course found</div>;
 
-    const totalDuration =
-        course.syllabus?.reduce((sum: number, lesson: any) => sum + (lesson.duration || 0), 0) || 0;
+    
 
     return (
-        <div className="min-h-screen bg-gray-50 p-6">
+        <div className="min-h-screen bg-linear-to-b from-gray-50 to-gray-100 p-4 md:p-6 lg:p-8">
             {/* HEADER */}
-            <div className="flex items-center justify-between mb-6">
-                <div>
-                    <h1 className="text-3xl font-semibold">{course.title}</h1>
-                    <p className="text-gray-600">{course.category}</p>
-                </div>
-
-                <div className="flex items-center gap-3">
-                    <Badge variant="outline" className="text-lg px-3 py-1">
-                        ${course.price}
-                    </Badge>
-                    <Button size="sm">Publish</Button>
-                </div>
-            </div>
-
-            <Separator className="my-4" />
+           <CourseStats course={course} />
 
             {/* TABS */}
             <Tabs defaultValue="overview" className="w-full">
-                <TabsList className="bg-white">
-                    <TabsTrigger value="overview">Overview</TabsTrigger>
-                    <TabsTrigger value="lessons">Lessons</TabsTrigger>
-                    <TabsTrigger value="resources">Resources</TabsTrigger>
-                    <TabsTrigger value="tags">Tags</TabsTrigger>
-                    <TabsTrigger value="settings">Settings</TabsTrigger>
+                <TabsList className="bg-white border rounded-lg p-1 w-full md:w-auto">
+                    <TabsTrigger value="overview" className="gap-2 data-[state=active]:bg-linear-to-r data-[state=active]:from-blue-50 data-[state=active]:to-indigo-50">
+                        <BookOpen className="h-4 w-4" />
+                        Overview
+                    </TabsTrigger>
+                    <TabsTrigger value="lessons" className="gap-2 data-[state=active]:bg-linear-to-r data-[state=active]:from-blue-50 data-[state=active]:to-indigo-50">
+                        <Video className="h-4 w-4" />
+                        Lessons
+                    </TabsTrigger>
+                    <TabsTrigger value="resources" className="gap-2 data-[state=active]:bg-linear-to-r data-[state=active]:from-blue-50 data-[state=active]:to-indigo-50">
+                        <FileText className="h-4 w-4" />
+                        Resources
+                    </TabsTrigger>
+                    <TabsTrigger value="tags" className="gap-2 data-[state=active]:bg-linear-to-r data-[state=active]:from-blue-50 data-[state=active]:to-indigo-50">
+                        <Tag className="h-4 w-4" />
+                        Tags
+                    </TabsTrigger>
+                    <TabsTrigger value="settings" className="gap-2 data-[state=active]:bg-linear-to-r data-[state=active]:from-blue-50 data-[state=active]:to-indigo-50">
+                        <Settings className="h-4 w-4" />
+                        Settings
+                    </TabsTrigger>
                 </TabsList>
 
                 {/* OVERVIEW */}
-                <TabsContent value="overview" className="mt-6 space-y-6">
-                    <Card>
-                        <CardHeader>
-                            <CardTitle>Course Overview</CardTitle>
+                <TabsContent value="overview" className="mt-6 space-y-6 animate-in fade-in duration-300">
+                    <Card className="border-none shadow-lg">
+                        <CardHeader className="pb-3">
+                            <CardTitle className="text-xl flex items-center gap-2">
+                                <BookOpen className="h-5 w-5" />
+                                Course Details
+                            </CardTitle>
+                            <CardDescription>Complete information about your course</CardDescription>
                         </CardHeader>
-                        <CardContent className="space-y-4">
-                            <p className="text-gray-700">{course.description}</p>
+                        <CardContent className="space-y-6">
+                            <div className="grid md:grid-cols-2 gap-8">
+                                {/* Thumbnail */}
+                                {course.thumbnail && (
+                                    <div className="space-y-3">
+                                        <h3 className="font-semibold text-gray-700 flex items-center gap-2">
+                                            Course Thumbnail
+                                        </h3>
+                                        <div className="relative rounded-xl overflow-hidden border border-gray-200 shadow-md">
+                                            <img
+                                                src={course.thumbnail}
+                                                alt="Course Thumbnail"
+                                                className="w-full h-48 object-cover hover:scale-105 transition-transform duration-300"
+                                            />
+                                            <div className="absolute inset-0 bg-linear-to-t from-black/20 to-transparent"></div>
+                                        </div>
+                                    </div>
+                                )}
 
-                            <div className="flex flex-wrap gap-6">
-                                <div>
-                                    <p className="font-semibold">Category</p>
-                                    <p>{course.category}</p>
-                                </div>
-
-                                <div>
-                                    <p className="font-semibold">Students</p>
-                                    <p>{course.students?.length || 0}</p>
-                                </div>
-
-                                <div>
-                                    <p className="font-semibold">Total Duration</p>
-                                    <p>{totalDuration} min</p>
-                                </div>
-
-                                <div>
-                                    <p className="font-semibold">Rating</p>
-                                    <p>{course.rating ?? "N/A"}</p>
-                                </div>
+                                {/* Intro Video */}
+                                {course.introVideo && (
+                                    <div className="space-y-3">
+                                        <h3 className="font-semibold text-gray-700 flex items-center gap-2">
+                                            <PlayCircle className="h-5 w-5" />
+                                            Introduction Video
+                                        </h3>
+                                        <div className="relative rounded-xl overflow-hidden border border-gray-200 shadow-md">
+                                            <iframe
+                                                className="w-full h-48"
+                                                src={course.introVideo.replace("watch?v=", "embed/")}
+                                                title="Intro Video"
+                                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                                allowFullScreen
+                                            ></iframe>
+                                        </div>
+                                    </div>
+                                )}
                             </div>
 
-                            {course.thumbnail && (
-                                <div>
-                                    <p className="font-semibold mb-2">Thumbnail</p>
-                                    <img
-                                        src={course.thumbnail}
-                                        alt="Course Thumbnail"
-                                        className="w-64 rounded-lg shadow border"
-                                    />
-                                </div>
-                            )}
-
-                            {course.introVideo && (
-                                <div className="mt-4">
-                                    <p className="font-semibold mb-2">Intro Video</p>
-                                    <iframe
-                                        className="w-full max-w-xl h-64 rounded-lg shadow"
-                                        src={course.introVideo.replace("watch?v=", "embed/")}
-                                        title="Intro Video"
-                                        allowFullScreen
-                                    ></iframe>
+                            {/* Syllabus Preview */}
+                            {course.syllabus && course.syllabus.length > 0 && (
+                                <div className="space-y-3">
+                                    <h3 className="font-semibold text-gray-700">Course Syllabus ({course.syllabus.length} modules)</h3>
+                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+                                        {course.syllabus.slice(0, 8).map((lesson: any, index: number) => (
+                                            <div key={index} className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
+                                                <div className="h-8 w-8 rounded-full bg-blue-100 flex items-center justify-center shrink-0">
+                                                    <span className="text-sm font-semibold text-blue-600">{index + 1}</span>
+                                                </div>
+                                                <div className="min-w-0 flex-1">
+                                                    <p className="font-medium text-sm truncate">{lesson.title}</p>
+                                                    {lesson.duration && (
+                                                        <p className="text-xs text-gray-500">{lesson.duration} min</p>
+                                                    )}
+                                                </div>
+                                            </div>
+                                        ))}
+                                    </div>
                                 </div>
                             )}
                         </CardContent>
@@ -109,119 +138,224 @@ export default async function InstructorCourseDetailsPage({
                 </TabsContent>
 
                 {/* LESSONS */}
-                <TabsContent value="lessons" className="mt-6">
-                    <Card>
-                        <CardHeader className="flex justify-between items-center">
-                            <CardTitle>Lessons / Modules</CardTitle>
+                <TabsContent value="lessons" className="mt-6 animate-in fade-in duration-300">
+                    <Card className="border-none shadow-lg">
+                        <CardHeader className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pb-3">
+                            <div>
+                                <CardTitle className="text-xl flex items-center gap-2">
+                                    <Video className="h-5 w-5" />
+                                    Course Lessons
+                                </CardTitle>
+                                <CardDescription>
+                                    Manage your course content and modules
+                                </CardDescription>
+                            </div>
                             <AddLessonModal courseId={course._id} />
                         </CardHeader>
-
                         <CardContent>
                             {course.syllabus?.length ? (
-                                <ul className="space-y-2">
-                                    {course.syllabus.map((lesson: any) => (
-                                        <li
-                                            key={lesson._id}
-                                            className="flex justify-between items-center py-2 border-b"
+                                <div className="space-y-3">
+                                    {course.syllabus.map((lesson: any, index: number) => (
+                                        <div
+                                            key={lesson._id || index}
+                                            className="group flex items-center justify-between p-4 rounded-xl border border-gray-200 hover:border-blue-300 hover:shadow-md transition-all duration-200"
                                         >
-                                            <div>
-                                                <p className="font-medium">
-                                                    {lesson.title} ({lesson.duration} min)
-                                                </p>
-                                                {lesson.videoUrl && (
-                                                    <a
-                                                        href={lesson.videoUrl}
-                                                        target="_blank"
-                                                        className="text-blue-600 text-sm"
-                                                    >
-                                                        Watch Video
-                                                    </a>
-                                                )}
+                                            <div className="flex items-center gap-4 flex-1 min-w-0">
+                                                <div className="h-10 w-10 rounded-lg bg-linear-to-br from-blue-100 to-indigo-100 flex items-center justify-center shrink-0">
+                                                    <span className="font-bold text-blue-700">{index + 1}</span>
+                                                </div>
+                                                <div className="min-w-0 flex-1">
+                                                    <h4 className="font-semibold text-gray-900 truncate">{lesson.title}</h4>
+                                                    <div className="flex items-center gap-4 mt-1">
+                                                        {lesson.duration && (
+                                                            <div className="flex items-center gap-1 text-sm text-gray-500">
+                                                                <Clock className="h-3 w-3" />
+                                                                {lesson.duration} min
+                                                            </div>
+                                                        )}
+                                                        {lesson.videoUrl && (
+                                                            <a
+                                                                href={lesson.videoUrl}
+                                                                target="_blank"
+                                                                className="flex items-center gap-1 text-sm text-blue-600 hover:text-blue-800"
+                                                            >
+                                                                <ExternalLink className="h-3 w-3" />
+                                                                Watch Video
+                                                            </a>
+                                                        )}
+                                                    </div>
+                                                </div>
                                             </div>
-                                            <Button variant="ghost" size="sm">
-                                                Edit
-                                            </Button>
-                                        </li>
+                                            <div className="flex items-center gap-2 shrink-0">
+                                                <Button variant="ghost" size="icon" className="h-8 w-8 opacity-0 group-hover:opacity-100 transition-opacity">
+                                                    <Edit2 className="h-4 w-4" />
+                                                </Button>
+                                                <Button variant="ghost" size="icon" className="h-8 w-8 opacity-0 group-hover:opacity-100 transition-opacity">
+                                                    <Trash2 className="h-4 w-4" />
+                                                </Button>
+                                            </div>
+                                        </div>
                                     ))}
-                                </ul>
+                                </div>
                             ) : (
-                                <p className="text-gray-500">No lessons yet.</p>
+                                <div className="text-center py-12">
+                                    <div className="mx-auto w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mb-4">
+                                        <Video className="h-8 w-8 text-gray-400" />
+                                    </div>
+                                    <h3 className="text-lg font-semibold text-gray-700 mb-2">No Lessons Yet</h3>
+                                    <p className="text-gray-500 mb-6">Start by adding your first lesson to this course</p>
+                                    <AddLessonModal courseId={course._id} />
+                                </div>
                             )}
                         </CardContent>
                     </Card>
                 </TabsContent>
 
                 {/* RESOURCES */}
-                <TabsContent value="resources" className="mt-6">
-                    <Card>
-                        <CardHeader className="flex justify-between items-center">
-                            <CardTitle>Resources</CardTitle>
+                <TabsContent value="resources" className="mt-6 animate-in fade-in duration-300">
+                    <Card className="border-none shadow-lg">
+                        <CardHeader className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pb-3">
+                            <div>
+                                <CardTitle className="text-xl flex items-center gap-2">
+                                    <FileText className="h-5 w-5" />
+                                    Course Resources
+                                </CardTitle>
+                                <CardDescription>
+                                    Supplementary materials for your students
+                                </CardDescription>
+                            </div>
                             <AddResourceModal courseId={course._id} />
                         </CardHeader>
-
                         <CardContent>
                             {course.resources?.length ? (
-                                <ul className="space-y-3">
-                                    {course.resources.map((r: any) => (
-                                        <li
-                                            key={r._id}
-                                            className="flex justify-between items-center py-2 border-b"
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    {course.resources.map((resource: any) => (
+                                        <div
+                                            key={resource._id}
+                                            className="group p-4 rounded-xl border border-gray-200 hover:border-green-300 hover:shadow-md transition-all duration-200"
                                         >
-                                            <div>
-                                                <p className="font-semibold">{r.title}</p>
+                                            <div className="flex items-start justify-between mb-3">
+                                                <div className="flex items-center gap-3">
+                                                    <div className="h-10 w-10 rounded-lg bg-green-100 flex items-center justify-center">
+                                                        <FileText className="h-5 w-5 text-green-600" />
+                                                    </div>
+                                                    <div>
+                                                        <h4 className="font-semibold text-gray-900">{resource.title}</h4>
+                                                        <p className="text-sm text-gray-500 truncate max-w-[200px]">
+                                                            {resource.link}
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                                <div className="flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                                                    <Button variant="ghost" size="icon" className="h-7 w-7">
+                                                        <Edit2 className="h-3 w-3" />
+                                                    </Button>
+                                                    <Button variant="ghost" size="icon" className="h-7 w-7">
+                                                        <Trash2 className="h-3 w-3" />
+                                                    </Button>
+                                                </div>
+                                            </div>
+                                            <div className="flex justify-between items-center">
                                                 <a
-                                                    href={r.link}
-                                                    className="text-blue-600 text-sm"
+                                                    href={resource.link}
                                                     target="_blank"
+                                                    className="text-sm text-blue-600 hover:text-blue-800 flex items-center gap-1"
                                                 >
-                                                    {r.link}
+                                                    <ExternalLink className="h-3 w-3" />
+                                                    Open Resource
                                                 </a>
                                             </div>
-                                            <Button variant="ghost" size="sm">
-                                                Edit
-                                            </Button>
-                                        </li>
+                                        </div>
                                     ))}
-                                </ul>
+                                </div>
                             ) : (
-                                <p className="text-gray-500">No resources yet.</p>
+                                <div className="text-center py-12">
+                                    <div className="mx-auto w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mb-4">
+                                        <FileText className="h-8 w-8 text-gray-400" />
+                                    </div>
+                                    <h3 className="text-lg font-semibold text-gray-700 mb-2">No Resources Yet</h3>
+                                    <p className="text-gray-500 mb-6">Add helpful resources like PDFs, links, or code files</p>
+                                    <AddResourceModal courseId={course._id} />
+                                </div>
                             )}
                         </CardContent>
                     </Card>
                 </TabsContent>
 
                 {/* TAGS */}
-                <TabsContent value="tags" className="mt-6">
-                    <Card>
-                        <CardHeader className="flex justify-between items-center">
-                            <CardTitle>Tags</CardTitle>
+                <TabsContent value="tags" className="mt-6 animate-in fade-in duration-300">
+                    <Card className="border-none shadow-lg">
+                        <CardHeader className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pb-3">
+                            <div>
+                                <CardTitle className="text-xl flex items-center gap-2">
+                                    <Tag className="h-5 w-5" />
+                                    Course Tags
+                                </CardTitle>
+                                <CardDescription>
+                                    Tags help students discover your course
+                                </CardDescription>
+                            </div>
                             <AddTagModal courseId={course._id} />
                         </CardHeader>
-
-                        <CardContent className="flex gap-3 flex-wrap">
+                        <CardContent>
                             {course.tags?.length ? (
-                                course.tags.map((tag: string) => (
-                                    <Badge key={tag} variant="secondary" className="px-3 py-1">
-                                        {tag}
-                                    </Badge>
-                                ))
+                                <div className="flex flex-wrap gap-3">
+                                    {course.tags.map((tag: string, index: number) => (
+                                        <div key={index} className="group relative">
+                                            <Badge
+                                                variant="secondary"
+                                                className="px-4 py-2 text-sm rounded-full bg-linear-to-r from-blue-50 to-indigo-50 border border-blue-100 hover:border-blue-300 transition-colors group-hover:pr-8"
+                                            >
+                                                {tag}
+                                            </Badge>
+                                            <button className="absolute right-2 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity">
+                                                <X className="h-3 w-3 text-gray-400 hover:text-gray-600" />
+                                            </button>
+                                        </div>
+                                    ))}
+                                </div>
                             ) : (
-                                <p className="text-gray-500">No tags yet.</p>
+                                <div className="text-center py-12">
+                                    <div className="mx-auto w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mb-4">
+                                        <Tag className="h-8 w-8 text-gray-400" />
+                                    </div>
+                                    <h3 className="text-lg font-semibold text-gray-700 mb-2">No Tags Yet</h3>
+                                    <p className="text-gray-500 mb-6">Add relevant tags to improve discoverability</p>
+                                    <AddTagModal courseId={course._id} />
+                                </div>
                             )}
                         </CardContent>
                     </Card>
                 </TabsContent>
 
                 {/* SETTINGS */}
-                <TabsContent value="settings" className="mt-6">
-                    <Card>
-                        <CardHeader>
-                            <CardTitle>Course Settings</CardTitle>
+                <TabsContent value="settings" className="mt-6 animate-in fade-in duration-300">
+                    <Card className="border-none shadow-lg">
+                        <CardHeader className="pb-3">
+                            <CardTitle className="text-xl flex items-center gap-2">
+                                <Settings className="h-5 w-5" />
+                                Course Settings
+                            </CardTitle>
+                            <CardDescription>Manage your course configuration</CardDescription>
                         </CardHeader>
-                        <CardContent>
-                            <Button variant="destructive" className="w-fit">
-                                Delete Course
-                            </Button>
+                        <CardContent className="space-y-6">
+                            <div className="space-y-4">
+                                <div className="p-4 border border-red-200 rounded-xl bg-red-50">
+                                    <h3 className="font-semibold text-red-800 mb-2">Danger Zone</h3>
+                                    <p className="text-sm text-red-600 mb-4">
+                                        Once you delete a course, there is no going back. Please be certain.
+                                    </p>
+                                    <div className="flex gap-3">
+                                        <Button variant="outline" size="sm" className="border-red-300 text-red-700 hover:bg-red-50">
+                                            Archive Course
+                                        </Button>
+                                        <Button variant="destructive" size="sm" className="gap-2">
+                                            <Trash2 className="h-4 w-4" />
+                                            Delete Course
+                                        </Button>
+                                    </div>
+                                </div>
+                            </div>
                         </CardContent>
                     </Card>
                 </TabsContent>

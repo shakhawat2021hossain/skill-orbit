@@ -1,0 +1,29 @@
+"use server";
+
+import { getCookie } from "@/components/auth/handleToken";
+import { serverFetch } from "@/lib/serverFetch";
+
+export const deleteLesson = async (
+  courseId: string,
+  lessonId: string
+): Promise<boolean> => {
+  try {
+    const token = await getCookie("accessToken");
+
+    const res = await serverFetch.delete(`/lesson/${courseId}/${lessonId}`, {
+      headers: {
+        ...(token ? { Authorization: `${token}` } : {}),
+      },
+    });
+
+    if (!res.ok) {
+      console.log("deleteLesson failed", await res.text());
+      return false;
+    }
+
+    return true;
+  } catch (error) {
+    console.log("Error deleting lesson:", error);
+    return false;
+  }
+};
