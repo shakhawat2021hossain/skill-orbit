@@ -12,9 +12,10 @@ export default function EnrollButton({ courseId }: { courseId: string }) {
       setLoading(true);
       const result = await enrollCourse(courseId);
       setLoading(false);
+    //   console.log("btn",result)
 
       if (!result) {
-        alert("Failed to start enrollment. Please login and try again.");
+        alert("Failed to start enrollment.");
         return;
       }
 
