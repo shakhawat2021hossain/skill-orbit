@@ -14,6 +14,7 @@ import {
 import Image from "next/image";
 import Link from "next/link";
 import { getCourse } from "@/services/course/getCourse";
+import EnrollButton from "@/components/course/EnrollButton";
 
 // Mock syllabus data since not in your JSON
 const mockSyllabus = [
@@ -79,6 +80,11 @@ export default async function CourseDetailsPage({
 
     const totalHours = Math.floor(course?.totalDuration || 10 / 60);
     const lessonCount = 6; // Default lesson count
+
+
+    const onEnroll = () =>{
+        
+    }
 
     return (
         <div className="min-h-screen bg-gray-50">
@@ -223,9 +229,7 @@ export default async function CourseDetailsPage({
                                     <div className="flex items-baseline mb-2">
                                         <span className="text-3xl font-bold text-gray-900">${course.price}</span>
                                     </div>
-                                    <Button className="w-full bg-linear-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 mb-4">
-                                        Enroll Now
-                                    </Button>
+                                    <EnrollButton courseId={course._id} />
                                     <p className="text-center text-sm text-gray-500">
                                         30-day money-back guarantee
                                     </p>

@@ -209,7 +209,7 @@ export function isAuthRoute(pathname: string) {
 // 
 export function getDefaultDashboardRoute(role: UserRole) {
     if(role === UserRole.INSTRUCTOR) return "/instructor/dashboard"
-    return role === UserRole.ADMIN ? "/admin/dashboard" : "/dashboard";
+    return role === UserRole.ADMIN ? "/admin/dashboard" : "/dashboard/student";
 }
 
 // the ultimate func for deciding

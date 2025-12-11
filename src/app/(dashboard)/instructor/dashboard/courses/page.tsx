@@ -1,43 +1,11 @@
-"use client";
-
-import { useEffect, useState } from "react";
-import { ICourse } from "@/types/course";
 import { Button } from "@/components/ui/button";
 import { Plus, BookOpen } from "lucide-react";
 import Link from "next/link";
-import { getInsCourses } from "@/services/course/getInsCourses";
+import { getInsCourses } from "@/services/instructor/getInsCourses";
 
-const InstructorCourses = () => {
-    const [courses, setCourses] = useState<ICourse[]>([]);
-    const [loading, setLoading] = useState(true);
+const InstructorCourses = async () => {
 
-
-
-    useEffect(() => {
-        fetchCourses();
-    }, []);
-
-    const fetchCourses = async () => {
-        try {
-            const data = await getInsCourses();
-            setCourses(data || []);
-        } catch (error) {
-            console.error("Error fetching courses:", error);
-        } finally {
-            setLoading(false);
-        }
-    };
-
-    if (loading) {
-        return (
-            <div className="flex items-center justify-center min-h-[400px]">
-                <div className="text-center">
-                    <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
-                    <p className="mt-2 text-muted-foreground">Loading courses...</p>
-                </div>
-            </div>
-        );
-    }
+    const courses = await getInsCourses() || [];
 
     return (
         <div className="container mx-auto p-6">
@@ -50,7 +18,7 @@ const InstructorCourses = () => {
                     </p>
                 </div>
                 <Button asChild>
-                    <Link href="/instructor/courses/create">
+                    <Link href="/instructor/dashboard/add-course">
                         <Plus className="mr-2 h-4 w-4" />
                         Create New Course
                     </Link>
@@ -103,12 +71,6 @@ const InstructorCourses = () => {
                         </div>
                     </div>
 
-                    {/* Courses Grid */}
-                    {/* <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                        {courses.map((course) => (
-                            <CourseCard key={course._id} course={course} />
-                        ))}
-                    </div> */}
                     {/* Courses Table */}
                     <div className="overflow-x-auto rounded-lg border">
                         <table className="w-full text-sm">

@@ -7,7 +7,6 @@ import AddLessonModal from "@/components/dashboard/instructor/manageCourse/AddLe
 import AddResourceModal from "@/components/dashboard/instructor/manageCourse/AddResource";
 import AddTagModal from "@/components/dashboard/instructor/manageCourse/AddTag";
 import {
-    Clock,
     FileText,
     Video,
     Tag,
@@ -21,7 +20,6 @@ import {
 } from "lucide-react";
 import CourseStats from "@/components/dashboard/instructor/manageCourse/CourseStats";
 import LessonsData from "@/components/dashboard/instructor/manageCourse/LessonsData";
-import { deleteLesson } from "@/services/course/deleteLesson";
 
 export default async function InstructorCourseDetailsPage({
     params,

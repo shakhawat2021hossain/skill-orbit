@@ -27,7 +27,7 @@ const navLinks = [
 
 const authenticatedRoutes = {
   STUDENT: [
-    { name: "Dashboard", href: "/dashboard" },
+    { name: "Dashboard", href: "/dashboard/student" },
     { name: "Profile", href: "/profile" },
 
   ],

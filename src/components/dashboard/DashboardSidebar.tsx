@@ -47,11 +47,11 @@ export default function DashboardSidebar({ userRole, userName }: DashboardSideba
     ];
 
     const studentItems = [
-      { label: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
-      { label: "My Learning", href: "/dashboard/student/learning", icon: BookOpen },
+      { label: "Dashboard", href: "/dashboard/student", icon: LayoutDashboard },
+      { label: "My Learning", href: "/dashboard/learning", icon: BookOpen },
       { label: "Wishlist", href: "/dashboard/student/wishlist", icon: Star },
-      { label: "Certificates", href: "/dashboard/student/certificates", icon: Award },
-      { label: "Purchase History", href: "/dashboard/student/purchases", icon: ShoppingBag },
+      { label: "Certificates", href: "/dashboard/certificates", icon: Award },
+      { label: "My Courses", href: "/dashboard/my-course", icon: ShoppingBag },
       { label: "Progress", href: "/dashboard/student/progress", icon: Clock },
     ];
 

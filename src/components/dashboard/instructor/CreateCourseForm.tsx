@@ -28,7 +28,7 @@ import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { ArrowLeft, BookOpen, DollarSign, User, Save, FileText, Tag } from "lucide-react";
-import { addCourse } from "@/services/course/addCourse";
+import { addCourse } from "@/services/instructor/addCourse";
 import { Category, type CourseFormData, courseSchema } from "@/types/course";
 
 export default function CreateCourse() {
@@ -67,7 +67,7 @@ export default function CreateCourse() {
                 <div className="mb-8">
                     <div className="flex items-center justify-between mb-6">
                         <div className="flex items-center gap-3">
-                            <Link href="/dashboard/instructor/courses">
+                            <Link href="/dashboard/instructor/add-course">
                                 <Button variant="ghost" size="sm">
                                     <ArrowLeft className="h-4 w-4 mr-2" />
                                     Back to Courses
