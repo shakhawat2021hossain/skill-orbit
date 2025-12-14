@@ -48,11 +48,11 @@ export default function DashboardSidebar({ userRole, userName }: DashboardSideba
 
     const studentItems = [
       { label: "Dashboard", href: "/dashboard/student", icon: LayoutDashboard },
-      { label: "My Learning", href: "/dashboard/learning", icon: BookOpen },
+      // { label: "My Learning", href: "/dashboard/learning", icon: BookOpen },
       { label: "Wishlist", href: "/dashboard/student/wishlist", icon: Star },
-      { label: "Certificates", href: "/dashboard/certificates", icon: Award },
+      // { label: "Certificates", href: "/dashboard/certificates", icon: Award },
       { label: "My Courses", href: "/dashboard/my-course", icon: ShoppingBag },
-      { label: "Progress", href: "/dashboard/student/progress", icon: Clock },
+      // { label: "Progress", href: "/dashboard/student/progress", icon: Clock },
     ];
 
     const adminItems = [
