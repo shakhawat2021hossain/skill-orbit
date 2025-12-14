@@ -83,7 +83,7 @@ const myCoursesPage = async () => {
                                         {/* Action Button */}
                                         <td className="p-4 text-right">
                                             <Button asChild variant="outline" size="sm">
-                                                <Link href={`/dashboard/courses/${course._id}`}>
+                                                <Link href={`/dashboard/my-course/${course._id}`}>
                                                     Continue
                                                 </Link>
                                             </Button>

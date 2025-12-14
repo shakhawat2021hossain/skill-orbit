@@ -1,5 +1,19 @@
 import z from "zod";
 
+
+
+export interface ILesson {
+    _id: string;
+    title: string;
+    videoUrl?: string;
+    duration?: number;
+    courseId: string;
+}
+
+
+
+
+
 export enum Category {
     WEB_DEVELOPMENT = "Web Development",
     PROGRAMMING = "Programming",
@@ -27,7 +41,7 @@ export interface ICourse {
 
     thumbnail?: string;
     tags?: string[];
-    syllabus?: string[];
+    syllabus?: ILesson[];
     totalDuration?: number;
     createdBy: string;
     students?: string[];
@@ -35,21 +49,30 @@ export interface ICourse {
 }
 
 export const courseSchema = z.object({
-  title: z.string().min(1, "Title is required"),
-  description: z.string().min(1, "Description is required"),
-  price: z.number().min(0, "Price must be a positive number"),
-  category: z.nativeEnum(Category),
-  instructor: z.string().min(1, "Instructor is required"),
-//   tags: z.array(z.string()).default([]),
+    title: z.string().min(1, "Title is required"),
+    description: z.string().min(1, "Description is required"),
+    price: z.number().min(0, "Price must be a positive number"),
+    category: z.nativeEnum(Category),
+    instructor: z.string().min(1, "Instructor is required")
 });
-// export const courseSchema = z.object({
-//     title: z.string().min(5),
-//     description: z.string().min(20),
-//     price: z.coerce.number().min(0),
-//     category: z.nativeEnum(Category),
-//     instructor: z.string().min(2),
-//     tags: z.array(z.string()).default([]),
-// });
 
 
 export type CourseFormData = z.infer<typeof courseSchema>;
+
+
+
+export interface IEnrollment {
+    _id: string;
+    studentId: string;
+    courseId: string | ICourse;
+    progress: number;
+    paymentStatus: "PAID" | "UNPAID";
+    completedLessons: string[];
+    createdAt: string;
+    updatedAt: string;
+}
+
+export interface IMyCourseDetails {
+    enrollment: IEnrollment;
+    course: ICourse;
+}

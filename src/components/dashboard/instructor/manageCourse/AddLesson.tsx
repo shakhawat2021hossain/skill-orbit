@@ -11,7 +11,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { createLesson } from "@/services/course/createLesson";
+import { createLesson } from "@/services/instructor/createLesson";
 import { useRouter } from "next/navigation";
 
 export default function AddLessonModal({ courseId }: { courseId: string }) {

@@ -15,6 +15,8 @@ export const enrollCourse = async (courseId: string): Promise<any | null> => {
 			body: JSON.stringify({}),
 		});
 
+		console.log("res", res)
+
 		if (!res.ok) {
 			console.log("enrollCourse failed", await res.text());
 			return null;

@@ -1,7 +1,7 @@
 "use client"
 import { useEffect, useState } from 'react';
 import { ICourse } from '@/types/course';
-import { deleteLesson } from "@/services/course/deleteLesson";
+import { deleteLesson } from "@/services/instructor/deleteLesson";
 import { CardContent } from '@/components/ui/card';
 import { ClockCheck, Edit2, ExternalLink, Trash2, Video } from 'lucide-react';
 import { Button } from '@/components/ui/button';
