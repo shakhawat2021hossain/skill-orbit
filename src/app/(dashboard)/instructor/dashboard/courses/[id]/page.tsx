@@ -16,10 +16,12 @@ import {
     Edit2,
     Trash2,
     PlayCircle,
-    X
+    X,
+    Pencil
 } from "lucide-react";
 import CourseStats from "@/components/dashboard/instructor/manageCourse/CourseStats";
 import LessonsData from "@/components/dashboard/instructor/manageCourse/LessonsData";
+import EditCourseModal from "@/components/dashboard/instructor/EditCourseModal";
 
 export default async function InstructorCourseDetailsPage({
     params,
@@ -29,16 +31,16 @@ export default async function InstructorCourseDetailsPage({
     const { id } = await params;
     const course = await getCourse(id);
 
-    
+
 
     if (!course) return <div>No course found</div>;
 
-    
+
 
     return (
         <div className="min-h-screen bg-linear-to-b from-gray-50 to-gray-100 p-4 md:p-6 lg:p-8">
             {/* HEADER */}
-           <CourseStats course={course} />
+            <CourseStats course={course} />
 
             {/* TABS */}
             <Tabs defaultValue="overview" className="w-full">
@@ -68,12 +70,24 @@ export default async function InstructorCourseDetailsPage({
                 {/* OVERVIEW */}
                 <TabsContent value="overview" className="mt-6 space-y-6 animate-in fade-in duration-300">
                     <Card className="border-none shadow-lg">
-                        <CardHeader className="pb-3">
-                            <CardTitle className="text-xl flex items-center gap-2">
-                                <BookOpen className="h-5 w-5" />
-                                Course Details
-                            </CardTitle>
-                            <CardDescription>Complete information about your course</CardDescription>
+                        <CardHeader className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pb-3">
+                            <div>
+                                <CardTitle className="flex items-center gap-2">
+                                    <BookOpen className="h-5 w-5 text-blue-600" />
+                                    Course Overview
+                                </CardTitle>
+                                <CardDescription>
+                                    View and manage course details
+                                </CardDescription>
+                            </div>
+
+                            {/* Add Edit Button Here */}
+                            <EditCourseModal course={course}>
+                                <Button size="sm" className="gap-2">
+                                    <Pencil className="h-4 w-4" />
+                                    Edit Course
+                                </Button>
+                            </EditCourseModal>
                         </CardHeader>
                         <CardContent className="space-y-6">
                             <div className="grid md:grid-cols-2 gap-8">
@@ -154,7 +168,7 @@ export default async function InstructorCourseDetailsPage({
                             </div>
                             <AddLessonModal courseId={course._id} />
                         </CardHeader>
-                        <LessonsData course={course}/>
+                        <LessonsData course={course} />
                     </Card>
                 </TabsContent>
 

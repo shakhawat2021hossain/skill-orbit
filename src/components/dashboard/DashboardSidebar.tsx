@@ -117,7 +117,7 @@ export default function DashboardSidebar({ userRole, userName }: DashboardSideba
       >
         {/* Logo */}
         <div className="p-6 border-b">
-          <div className="text-xl font-bold bg-gradient-to-r">
+          <div className="text-xl font-bold bg-linear-to-r">
             Skill Orbit
           </div>
         </div>
@@ -136,7 +136,7 @@ export default function DashboardSidebar({ userRole, userName }: DashboardSideba
                 href={item.href}
                 onClick={() => setIsOpen(false)}
                 className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${active
-                  ? 'bg-gradient-to-r from-blue-50 to-purple-50 text-blue-600 border-l-4 border-blue-600'
+                  ? 'bg-linear-to-r from-blue-50 to-purple-50 text-blue-600 border-l-4 border-blue-600'
                   : 'text-gray-700 hover:bg-gray-50'
                   }`}
               >

@@ -236,7 +236,7 @@ export default function CoursePlayer({ course, enrollment }: IMyCourseDetails) {
                                                 }
                                             `}
                                         >
-                                            <div className="flex-shrink-0">
+                                            <div className="shrink-0">
                                                 <div className={`h-8 w-8 rounded-md flex items-center justify-center
                                                     ${isActive ? 'bg-blue-600 text-white' : 
                                                       isCompleted ? 'bg-green-100 text-green-600' : 
@@ -256,7 +256,7 @@ export default function CoursePlayer({ course, enrollment }: IMyCourseDetails) {
                                                     <h4 className={`font-medium text-sm truncate ${isActive ? 'text-blue-700' : 'text-gray-900'}`}>
                                                         {lesson.title}
                                                     </h4>
-                                                    <span className="text-xs text-gray-500 flex-shrink-0 ml-2">
+                                                    <span className="text-xs text-gray-500 shrink-0 ml-2">
                                                         {formatDuration(lesson.duration)}
                                                     </span>
                                                 </div>
