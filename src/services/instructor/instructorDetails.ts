@@ -2,31 +2,31 @@
 
 import { getCookie } from "@/components/auth/handleToken";
 import { serverFetch } from "@/lib/serverFetch";
-import { IMyCourseDetails } from "@/types/course";
+import { IUser } from "@/types/user";
 
-export const getMyCourseDeatils = async (id: string): Promise<IMyCourseDetails | null> => {
+export const getInsDetails = async (): Promise<IUser | null> => {
     const token = await getCookie("accessToken");
 
     try {
-        const res = await serverFetch.get(`/enrollment/${id}`, {
+        const res = await serverFetch.get(`/user/details`, {
             headers: {
                 "Content-Type": "application/json",
                 ...(token ? { Authorization: `${token}` } : {}),
             },
         });
-        // console.log(" res", res);
+        console.log(" res", res);
 
         if (!res.ok) {
-            console.log("fetch enrolled course detailed");
+            console.log("instructor details fetch failed");
             return null;
         }
 
         const result = await res.json();
-        // console.log("course res", result.data);
+        console.log("course res", result);
 
         return result?.data || result || null;
     } catch (error) {
-        console.log("Error fetching courses:", error);
+        console.log("Error fetching instructor details:", error);
         return null;
     }
 };

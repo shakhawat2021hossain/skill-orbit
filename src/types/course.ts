@@ -42,6 +42,7 @@ export interface ICourse {
     thumbnail?: string;
     tags?: string[];
     syllabus?: ILesson[];
+    isPublished: boolean;
     totalDuration?: number;
     createdBy: string;
     students?: string[];

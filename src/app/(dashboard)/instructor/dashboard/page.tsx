@@ -22,6 +22,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Progress } from "@/components/ui/progress";
 import { Badge } from "@/components/ui/badge";
 import Link from "next/link";
+import { getInsDetails } from "@/services/instructor/instructorDetails";
 
 // Mock data for instructor
 const mockData = {
@@ -57,7 +58,9 @@ const mockData = {
   ]
 };
 
-export default function InstructorDashboardHome() {
+export default async function InstructorDashboardHome() {
+  const details = await getInsDetails()
+  console.log(details)
   return (
     <div className="min-h-screen bg-linear-to-b from-gray-50 to-white p-4 md:p-6 lg:p-8">
       {/* Welcome Header */}

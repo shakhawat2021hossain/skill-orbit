@@ -3,6 +3,7 @@
 import { loginSchema } from "@/types/auth";
 import { cookies } from "next/headers";
 import { parse } from "cookie";
+import { serverFetch } from "@/lib/serverFetch";
 
 
 
@@ -25,11 +26,22 @@ export const loginAction = async (_: any, formData: FormData): Promise<any> => {
     const data = parsed.data;
 
     // Example API request
-    const res = await fetch(`http://localhost:5000/api/auth/login`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
+    // const res = await fetch(`http://localhost:5000/api/auth/login`, {
+    //     method: "POST",
+    //     headers: { "Content-Type": "application/json" },
+    //     body: JSON.stringify(data),
+    // });
+    const res = await serverFetch.post("/auth/login", {
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data)
     });
+    // const res = await fetch(`http://localhost:5000/api/auth/login`, {
+    //     method: "POST",
+    //     headers: { "Content-Type": "application/json" },
+    //     body: JSON.stringify(data),
+    // });
     // console.log("res", res)
 
     let accessTokenObject: null | any = null;

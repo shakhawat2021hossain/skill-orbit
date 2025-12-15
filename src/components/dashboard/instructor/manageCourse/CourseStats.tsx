@@ -1,12 +1,12 @@
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Separator } from "@/components/ui/separator";
 import { ICourse } from "@/types/course";
 import { Clock, DollarSign, Eye, Star, Users } from "lucide-react";
+import PublishConfirmationModal from "./ConfrimModal";
 
 
-export default function CourseStats({ course }: {course: ICourse}) {
+export default function CourseStats({ course }: { course: ICourse }) {
   const totalDuration =
     course.syllabus?.reduce((sum: number, lesson: any) => sum + (lesson.duration || 0), 0) || 0;
 
@@ -41,9 +41,11 @@ export default function CourseStats({ course }: {course: ICourse}) {
             <Eye className="h-4 w-4" />
             Preview
           </Button>
-          <Button size="sm" className="gap-1 bg-linear-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700">
-            Publish Course
-          </Button>
+          <PublishConfirmationModal
+            courseId={course._id}
+            isPublished={course?.isPublished}
+          />
+
         </div>
       </div>
 
