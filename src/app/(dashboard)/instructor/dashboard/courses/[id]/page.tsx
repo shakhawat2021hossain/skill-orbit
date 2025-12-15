@@ -3,7 +3,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import AddLessonModal from "@/components/dashboard/instructor/manageCourse/AddLesson";
+import AddLessonModal from "@/components/dashboard/instructor/managalesson/AddLesson";
 import AddResourceModal from "@/components/dashboard/instructor/manageCourse/AddResource";
 import AddTagModal from "@/components/dashboard/instructor/manageCourse/AddTag";
 import {
@@ -20,7 +20,7 @@ import {
     Pencil
 } from "lucide-react";
 import CourseStats from "@/components/dashboard/instructor/manageCourse/CourseStats";
-import LessonsData from "@/components/dashboard/instructor/manageCourse/LessonsData";
+import LessonsData from "@/components/dashboard/instructor/managalesson/LessonsData";
 import EditCourseModal from "@/components/dashboard/instructor/EditCourseModal";
 
 export default async function InstructorCourseDetailsPage({

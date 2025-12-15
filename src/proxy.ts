@@ -9,8 +9,8 @@ export async function proxy(req: NextRequest) {
     const url = req.nextUrl.clone();
 
 
-    console.log("cloned:", url)
-    console.log("path:", path)
+    // console.log("cloned:", url)
+    // console.log("path:", path)
     let user: JwtPayload | null = null;
 
     // ---- Step 1: Validate Token ----

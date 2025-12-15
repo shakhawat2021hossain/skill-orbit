@@ -27,12 +27,15 @@ export const updateLesson = async (
       body: JSON.stringify(payload),
     });
 
+    console.log("res", res);
     if (!res.ok) {
       console.log("updateLesson failed", await res.text());
       return null;
     }
 
     const result = await res.json();
+    console.log("result", result);
+    
     return result?.data || result || null;
   } catch (error) {
     console.log("Error updating lesson:", error);

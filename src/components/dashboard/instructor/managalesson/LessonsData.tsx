@@ -7,6 +7,7 @@ import { ClockCheck, Edit2, ExternalLink, Trash2, Video } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import AddLessonModal from './AddLesson';
 import { useRouter } from 'next/navigation';
+import EditLessonModal from './EditLessonModal';
 
 
 const LessonsData = ({ course }: { course: ICourse }) => {
@@ -64,9 +65,11 @@ const LessonsData = ({ course }: { course: ICourse }) => {
                                     </div>
                                 </div>
                                 <div className="flex items-center gap-2 shrink-0">
-                                    <Button variant="ghost" size="icon" className="h-8 w-8 opacity-0 group-hover:opacity-100 transition-opacity">
-                                        <Edit2 className="h-4 w-4" />
-                                    </Button>
+                                    <EditLessonModal
+                                        courseId={course._id}
+                                        lesson={lesson}
+                                    />
+
                                     <Button onClick={() => handleDelete(lesson._id)} variant="ghost" size="icon" className="h-8 w-8 opacity-0 group-hover:opacity-100 transition-opacity" >
                                         <Trash2 className="h-4 w-4" />
                                     </Button>
