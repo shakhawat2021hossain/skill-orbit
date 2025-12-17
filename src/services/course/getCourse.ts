@@ -7,7 +7,7 @@ export const getCourse = async (id: string): Promise<ICourse | null> => {
     // console.log("id", id)
     try {
         const res = await serverFetch.get(`/course/${id}`);
-        // console.log(" res", res);
+        console.log("enroll course res", res);
 
         if (!res.ok) {
             console.log("courses fetch failed");
@@ -15,7 +15,7 @@ export const getCourse = async (id: string): Promise<ICourse | null> => {
         }
 
         const result = await res.json();
-        console.log("course res", result.data[0]);
+        console.log("enroll course", result.data[0]);
 
         return result?.data[0] || result || null;
     } catch (error) {

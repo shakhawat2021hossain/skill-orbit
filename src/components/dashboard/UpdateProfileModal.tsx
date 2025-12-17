@@ -149,7 +149,7 @@ export default function EditProfileModal({ user, children }: EditProfileModalPro
                   id="address"
                   value={formData.address}
                   onChange={(e) => setFormData({...formData, address: e.target.value})}
-                  className="pl-10 min-h-[80px]"
+                  className="pl-10 min-h-20"
                   placeholder="Your address"
                 />
               </div>

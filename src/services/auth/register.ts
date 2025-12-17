@@ -1,5 +1,6 @@
 "use server";
 
+import { serverFetch } from "@/lib/serverFetch";
 import { registerSchema } from "@/types/auth";
 
 export async function registerAction(prevState: any, formData: FormData) {
@@ -24,18 +25,19 @@ export async function registerAction(prevState: any, formData: FormData) {
 
 
     try {
-        const res = await fetch(`http://localhost:5000/api/auth/register`, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(data),
+        const res = await serverFetch.post("/auth/register", {
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data)
         });
-        console.log("res", res)
+        // console.log("res", res)
 
         // Backend response
         const result = await res.json();;
 
 
-        console.log("result:", result);
+        // console.log("result:", result);
 
         return result
     } catch (error) {

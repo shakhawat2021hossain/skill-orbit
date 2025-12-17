@@ -69,7 +69,7 @@ export default function Hero() {
                                 className="px-8 py-6 rounded-xl text-base font-semibold border-2 hover:bg-blue-50"
                                 asChild
                             >
-                                <Link href="/demo">
+                                <Link href="/">
                                     <div className="flex items-center">
                                         <Play className="h-5 w-5 text-blue-600 mr-2" />
                                         Watch Demo

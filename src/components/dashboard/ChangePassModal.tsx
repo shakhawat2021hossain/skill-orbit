@@ -108,7 +108,7 @@ export default function ChangePasswordModal({ userId, children }: ChangePassword
           <div className="space-y-4 py-4">
             {error && (
               <div className="flex items-center gap-2 p-3 bg-red-50 border border-red-200 rounded-lg text-red-700 text-sm">
-                <AlertCircle className="h-4 w-4 flex-shrink-0" />
+                <AlertCircle className="h-4 w-4 shrink-0" />
                 <span>{error}</span>
               </div>
             )}

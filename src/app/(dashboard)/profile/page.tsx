@@ -90,7 +90,7 @@ export default function ProfileManagementPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white p-4 md:p-6">
+    <div className="min-h-screen bg-linear-to-b from-gray-50 to-white p-4 md:p-6">
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <div className="mb-8">
@@ -137,7 +137,7 @@ export default function ProfileManagementPage() {
                   <div className="flex items-start gap-4">
                     <Avatar className="h-20 w-20">
                       <AvatarImage src={user.picture} alt={user.name} />
-                      <AvatarFallback className="text-lg bg-gradient-to-br from-blue-100 to-indigo-100 text-blue-700">
+                      <AvatarFallback className="text-lg bg-linear-to-br from-blue-100 to-indigo-100 text-blue-700">
                         {getInitials(user.name)}
                       </AvatarFallback>
                     </Avatar>

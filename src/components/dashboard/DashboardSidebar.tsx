@@ -56,12 +56,12 @@ export default function DashboardSidebar({ userRole, userName }: DashboardSideba
     ];
 
     const adminItems = [
-      { label: "Dashboard", href: "/dashboard/admin", icon: LayoutDashboard },
-      { label: "All Courses", href: "/dashboard/admin/courses", icon: BookOpen },
-      { label: "User Management", href: "/dashboard/admin/users", icon: Users },
-      { label: "Instructors", href: "/dashboard/admin/instructors", icon: Shield },
-      { label: "Analytics", href: "/dashboard/admin/analytics", icon: BarChart3 },
-      { label: "Reports", href: "/dashboard/admin/reports", icon: FileText },
+      { label: "Dashboard", href: "/admin/dashboard", icon: LayoutDashboard },
+      { label: "All Courses", href: "/admin/dashboard/courses", icon: BookOpen },
+      { label: "User Management", href: "/admin/dashboard/users", icon: Users },
+      { label: "Instructors", href: "/admin/dashboard/instructors", icon: Shield },
+      { label: "Analytics", href: "/admin/dashboard/analytics", icon: BarChart3 },
+      { label: "Reports", href: "/admin/dashboard/reports", icon: FileText },
     ];
 
     switch (userRole) {

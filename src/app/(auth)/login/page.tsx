@@ -34,7 +34,7 @@ export default function LoginPage() {
                 {/* Support Info */}
                 <div className="mt-8 text-center text-sm text-gray-500">
                     <p>Need help? <Link href="/contact" className="text-blue-600 hover:text-blue-800">Contact support</Link></p>
-                    <p className="mt-1">By continuing, you agree to our <Link href="/terms" className="text-blue-600 hover:text-blue-800">Terms</Link> and <Link href="/privacy" className="text-blue-600 hover:text-blue-800">Privacy Policy</Link></p>
+                    <p className="mt-1">By continuing, you agree to our <Link href="/" className="text-blue-600 hover:text-blue-800">Terms</Link> and <Link href="/" className="text-blue-600 hover:text-blue-800">Privacy Policy</Link></p>
                 </div>
             </div>
         </div>
