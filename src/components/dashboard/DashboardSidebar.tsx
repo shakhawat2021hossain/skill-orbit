@@ -59,9 +59,9 @@ export default function DashboardSidebar({ userRole, userName }: DashboardSideba
       { label: "Dashboard", href: "/admin/dashboard", icon: LayoutDashboard },
       { label: "All Courses", href: "/admin/dashboard/courses", icon: BookOpen },
       { label: "User Management", href: "/admin/dashboard/users", icon: Users },
-      { label: "Instructors", href: "/admin/dashboard/instructors", icon: Shield },
-      { label: "Analytics", href: "/admin/dashboard/analytics", icon: BarChart3 },
-      { label: "Reports", href: "/admin/dashboard/reports", icon: FileText },
+      // { label: "Instructors", href: "/admin/dashboard/instructors", icon: Shield },
+      // { label: "Analytics", href: "/admin/dashboard/analytics", icon: BarChart3 },
+      // { label: "Reports", href: "/admin/dashboard/reports", icon: FileText },
     ];
 
     switch (userRole) {
@@ -81,7 +81,7 @@ export default function DashboardSidebar({ userRole, userName }: DashboardSideba
   if (
     href === "/instructor/dashboard" ||
     href === "/dashboard" ||
-    href === "/dashboard/admin"
+    href === "/admin/dashboard"
   ) {
     return pathname === href;
   }
