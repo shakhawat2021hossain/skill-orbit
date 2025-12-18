@@ -53,7 +53,7 @@ import {
     RotateCcw
 } from "lucide-react";
 import { ICourse } from "@/types/course";
-import { getCourses } from "@/services/course/getCourses";
+import { getCoursesForAdmin } from "@/services/course/getCourses";
 import { updateDeleteOperation } from "@/services/course/deleteCourse";
 
 export default function AdminCourseManagementPage() {
@@ -76,7 +76,7 @@ export default function AdminCourseManagementPage() {
     const fetchCourses = async () => {
         try {
             setLoading(true);
-            const coursesData = await getCourses();
+            const coursesData = await getCoursesForAdmin();
             setCourses(coursesData || []);
         } catch (error) {
             console.error("Failed to fetch courses:", error);

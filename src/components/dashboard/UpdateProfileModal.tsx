@@ -16,13 +16,19 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { User, Mail, Phone, MapPin, School, Loader2 } from "lucide-react";
 import { IUser } from "@/types/user";
+import { updateUser } from "@/services/user/updateUser";
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
 interface EditProfileModalProps {
   user: IUser;
   children?: React.ReactNode;
+  onSuccess?: () => void;
 }
 
-export default function EditProfileModal({ user, children }: EditProfileModalProps) {
+export default function EditProfileModal({ user, children, onSuccess }: EditProfileModalProps) {
+  const router = useRouter();
+
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
@@ -51,8 +57,13 @@ export default function EditProfileModal({ user, children }: EditProfileModalPro
     setLoading(true);
 
     try {
-    //   const updatedUser = await updateUserInfo(user._id, formData);
-      
+      const updated = await updateUser(user._id, formData);
+      console.log("update", updated)
+      if(updated?.success){
+        toast.success("Updated User Successfully")
+        router.refresh()
+        onSuccess?.()
+      }
       setOpen(false);
     } catch (error) {
       console.error("Failed to update profile:", error);

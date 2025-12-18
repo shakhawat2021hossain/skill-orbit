@@ -102,6 +102,7 @@ export default function ProfileManagementPage() {
             <div className="flex gap-2">
               <EditProfileModal 
                 user={user} 
+                onSuccess={fetchUserData}
               >
                 <Button variant="outline" className="gap-2">
                   <Edit2 className="h-4 w-4" />
