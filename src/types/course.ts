@@ -48,6 +48,7 @@ export interface ICourse {
     students?: string[];
     rating?: string;
     isDeleted?: boolean;
+    createdAt: string;
 }
 
 export const courseSchema = z.object({

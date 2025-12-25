@@ -8,7 +8,7 @@ export const addToWishlist = async (courseId: string): Promise<any | null> => {
     try {
         const token = await getCookie("accessToken");
 
-        const res = await serverFetch.post(`/user/wishlist/${courseId}`, {
+        const res = await serverFetch.post(`/wishlist/${courseId}`, {
             headers: {
                 "Content-Type": "application/json",
                 ...(token ? { Authorization: `${token}` } : {}),

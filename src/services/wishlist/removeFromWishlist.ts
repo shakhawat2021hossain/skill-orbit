@@ -1,5 +1,6 @@
 "use server";
 
+import { revalidatePath } from "next/cache";
 import { getCookie } from "@/lib/handleToken";
 import { serverFetch } from "@/lib/serverFetch";
 
@@ -23,4 +24,17 @@ export const removeFromWishlist = async (courseId: string): Promise<boolean> => 
         console.log("Error removing from wishlist:", error);
         return false;
     }
+};
+
+
+
+export const removeFromWishlistAction = async (courseId: string) => {
+    const success = await removeFromWishlist(courseId);
+
+    if (success) {
+        revalidatePath("/wishlist");
+        return { success: true };
+    }
+
+    return { success: false, message: "Failed to remove from wishlist" };
 };

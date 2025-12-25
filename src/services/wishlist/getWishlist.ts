@@ -8,7 +8,7 @@ export const getWishlist = async (): Promise<ICourse[] | null> => {
     try {
         const token = await getCookie("accessToken");
 
-        const res = await serverFetch.get(`/user/wishlist`, {
+        const res = await serverFetch.get(`/wishlist/get-all`, {
             headers: {
                 "Content-Type": "application/json",
                 ...(token ? { Authorization: `${token}` } : {}),
