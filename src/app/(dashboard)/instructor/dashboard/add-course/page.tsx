@@ -1,4 +1,4 @@
-import CreateCourse from '@/components/dashboard/instructor/CreateCourseForm';
+import CreateCourse from '@/components/modules/instructor/manageCourse/CreateCourseForm';
 
 const CreateCoursePage = () => {
 

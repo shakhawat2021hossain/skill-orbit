@@ -19,7 +19,7 @@ export const getCourse = async (id: string): Promise<ICourse | null> => {
 
         return result?.data[0] || result || null;
     } catch (error) {
-        console.log("Error fetching user info:", error);
+        console.log("Error fetching user course:", error);
         return null;
     }
 };

@@ -1,7 +1,7 @@
 
 import { getUserInfo } from "@/services/user/getUser";
-import { getCookie } from "../auth/handleToken";
 import PublicNavbar from "./PublicNavbar";
+import { getCookie } from "@/lib/handleToken";
 
 export default async function Navbar() {
   const accessToken = await getCookie("accessToken");

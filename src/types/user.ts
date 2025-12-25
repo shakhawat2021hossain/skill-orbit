@@ -20,4 +20,5 @@ export interface IUser {
     isBlocked?: boolean; 
     institute?:string
     createdAt: Date;
+    wishlist?: string[]
 }

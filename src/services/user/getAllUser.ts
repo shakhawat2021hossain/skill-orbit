@@ -1,13 +1,10 @@
 "use server";
 
+import { getCookie } from "@/lib/handleToken";
 import { serverFetch } from "@/lib/serverFetch";
 import { IUser } from "@/types/user";
-import { cookies } from "next/headers";
 
-export const getCookie = async (key: string) => {
-    const cookieStore = await cookies();
-    return cookieStore.get(key)?.value || null;
-};
+
 
 export const getUsers = async (): Promise<IUser[] | null> => {
     try {
@@ -35,7 +32,7 @@ export const getUsers = async (): Promise<IUser[] | null> => {
 
         return result?.data || result?.user || result || null;
     } catch (error) {
-        console.log("Error fetching user info:", error);
+        console.log("Error fetching users info:", error);
         return null;
     }
 };

@@ -53,8 +53,8 @@ import {
     RotateCcw
 } from "lucide-react";
 import { ICourse } from "@/types/course";
-import { getCoursesForAdmin } from "@/services/course/getCourses";
 import { updateDeleteOperation } from "@/services/course/deleteCourse";
+import { getCoursesForAdmin } from "@/services/course/getCourses";
 
 export default function AdminCourseManagementPage() {
     const [courses, setCourses] = useState<ICourse[]>([]);

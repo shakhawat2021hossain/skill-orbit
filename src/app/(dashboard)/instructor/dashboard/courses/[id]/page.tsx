@@ -3,9 +3,9 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import AddLessonModal from "@/components/dashboard/instructor/managalesson/AddLesson";
-import AddResourceModal from "@/components/dashboard/instructor/manageCourse/AddResource";
-import AddTagModal from "@/components/dashboard/instructor/manageCourse/AddTag";
+import AddLessonModal from "@/components/modules/instructor/managalesson/AddLesson";
+import AddResourceModal from "@/components/modules/instructor/manageCourse/AddResource";
+import AddTagModal from "@/components/modules/instructor/manageCourse/AddTag";
 import {
     FileText,
     Video,
@@ -19,9 +19,9 @@ import {
     X,
     Pencil
 } from "lucide-react";
-import CourseStats from "@/components/dashboard/instructor/manageCourse/CourseStats";
-import LessonsData from "@/components/dashboard/instructor/managalesson/LessonsData";
-import EditCourseModal from "@/components/dashboard/instructor/EditCourseModal";
+import CourseStats from "@/components/modules/instructor/manageCourse/CourseStats";
+import LessonsData from "@/components/modules/instructor/managalesson/LessonsData";
+import EditCourseModal from "@/components/modules/instructor/manageCourse/EditCourseModal";
 
 export default async function InstructorCourseDetailsPage({
     params,

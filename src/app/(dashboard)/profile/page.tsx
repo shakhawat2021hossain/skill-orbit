@@ -26,8 +26,8 @@ import {
 import { IUser } from "@/types/user";
 import { format } from "date-fns";
 import { getUserInfo } from "@/services/user/getUser";
-import EditProfileModal from "@/components/dashboard/UpdateProfileModal";
-import ChangePasswordModal from "@/components/dashboard/ChangePassModal";
+import EditProfileModal from "@/components/modules/dashboard/UpdateProfileModal";
+import ChangePasswordModal from "@/components/modules/dashboard/ChangePassModal";
 
 export default function ProfileManagementPage() {
   const [user, setUser] = useState<IUser | null>(null);

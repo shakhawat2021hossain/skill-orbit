@@ -14,7 +14,7 @@ import {
 import Image from "next/image";
 import Link from "next/link";
 import { getCourse } from "@/services/course/getCourse";
-import EnrollButton from "@/components/course/EnrollButton";
+import EnrollButton from "@/components/modules/course/EnrollButton";
 
 // Mock syllabus data since not in your JSON
 const mockSyllabus = [

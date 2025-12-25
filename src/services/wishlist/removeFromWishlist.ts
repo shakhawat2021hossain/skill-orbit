@@ -1,7 +1,7 @@
 "use server";
 
+import { getCookie } from "@/lib/handleToken";
 import { serverFetch } from "@/lib/serverFetch";
-import { getCookie } from "@/components/auth/handleToken";
 
 export const removeFromWishlist = async (courseId: string): Promise<boolean> => {
     try {

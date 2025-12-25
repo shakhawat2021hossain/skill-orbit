@@ -1,6 +1,6 @@
 "use server";
 
-import { getCookie } from "@/components/auth/handleToken";
+import { getCookie } from "@/lib/handleToken";
 import { serverFetch } from "@/lib/serverFetch";
 
 export const enrollCourse = async (courseId: string): Promise<any | null> => {

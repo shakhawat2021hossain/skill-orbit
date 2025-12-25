@@ -1,4 +1,4 @@
-import CoursePlayer from "@/components/dashboard/student/CoursePlayer";
+import CoursePlayer from "@/components/modules/student/CoursePlayer";
 import { getMyCourseDeatils } from "@/services/student/getMyCourseDetails";
 
 const MyCourseDetails = async ({

@@ -1,6 +1,6 @@
 
 
-import ContactForm from "@/components/home/ContactForm";
+import ContactForm from "@/components/modules/home/ContactForm";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 

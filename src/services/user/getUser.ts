@@ -1,13 +1,9 @@
 "use server";
 
+import { getCookie } from "@/lib/handleToken";
 import { serverFetch } from "@/lib/serverFetch";
 import { IUser } from "@/types/user";
-import { cookies } from "next/headers";
 
-export const getCookie = async (key: string) => {
-    const cookieStore = await cookies();
-    return cookieStore.get(key)?.value || null;
-};
 
 export const getUserInfo = async (): Promise<IUser | null> => {
     try {
@@ -23,8 +19,8 @@ export const getUserInfo = async (): Promise<IUser | null> => {
             headers: {
                 Authorization: `${token}`,
             },
-            cache: "force-cache",
-            next: { tags: ["user-info"] },
+            // cache: "force-cache",
+            next: { tags: ["user"] },
         });
 
         if (!response.ok) {

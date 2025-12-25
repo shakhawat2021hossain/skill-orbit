@@ -5,7 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/sheet";
-import { Search, Menu, User } from "lucide-react";
+import { Search, Menu, User, Bookmark } from "lucide-react";
 
 import {
   DropdownMenu,
@@ -15,8 +15,7 @@ import {
   DropdownMenuItem,
   DropdownMenuSeparator,
 } from "@/components/ui/dropdown-menu";
-import { deleteCookie } from "../auth/handleToken";
-import { IUser, UserRole } from "@/types/user";
+import { IUser } from "@/types/user";
 
 const navLinks = [
   { name: "Home", href: "/" },
@@ -29,23 +28,31 @@ const authenticatedRoutes = {
   STUDENT: [
     { name: "Dashboard", href: "/dashboard/student" },
     { name: "Profile", href: "/profile" },
-
   ],
   INSTRUCTOR: [
     { name: "Dashboard", href: "/instructor/dashboard" },
     { name: "Profile", href: "/profile" },
-
   ],
   ADMIN: [
     { name: "Dashboard", href: "/admin/dashboard" },
     { name: "Profile", href: "/profile" },
-
   ],
 }
 
-export default function PublicNavbar({ accessToken, user }: { accessToken: string | null, user: IUser | null }) {
+export default function PublicNavbar({
+  accessToken,
+  user
+}: {
+  accessToken: string | null,
+  user: IUser | null
+}) {
   const [isScrolled, setIsScrolled] = useState(false);
   const pathname = usePathname();
+
+  // console.log(user)
+  // wishlist
+  const savedCount = user?.wishlist?.length as number || 0
+
 
   // Scroll listener
   useEffect(() => {
@@ -91,18 +98,6 @@ export default function PublicNavbar({ accessToken, user }: { accessToken: strin
 
           {/* Search + Auth */}
           <div className="flex items-center gap-4">
-            {/* Search Bar */}
-            <div className="hidden lg:block">
-              <div className="relative">
-                <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" />
-                <input
-                  type="text"
-                  placeholder="Search courses..."
-                  className="pl-10 pr-4 py-2 w-64 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                />
-              </div>
-            </div>
-
             {/* Desktop Auth */}
             <div className="hidden lg:flex items-center gap-3">
               {!accessToken ? (
@@ -110,45 +105,57 @@ export default function PublicNavbar({ accessToken, user }: { accessToken: strin
                   <Link href="/login">Login</Link>
                 </Button>
               ) : (
-                <DropdownMenu>
-                  <DropdownMenuTrigger asChild>
-                    <Button variant="outline" size="icon" className="rounded-full">
-                      <User className="h-5 w-5" />
-                    </Button>
-                  </DropdownMenuTrigger>
-
-                  <DropdownMenuContent align="end" className="w-48">
-                    <DropdownMenuLabel>{user?.name}</DropdownMenuLabel>
-                    <DropdownMenuSeparator />
-
-                    {/* <DropdownMenuItem asChild>
-                      <Link href="/dashboard">Dashboard</Link>
-                    </DropdownMenuItem>
-                    <DropdownMenuItem asChild>
-                      <Link href="/profile">Profile</Link>
-                    </DropdownMenuItem> */}
-                    {
-                      user &&
-                      authenticatedRoutes[user?.role].map(route => <DropdownMenuItem key={route.href} asChild>
-                        <Link href={route.href}>{route.name}</Link>
-                      </DropdownMenuItem>)
-                    }
-                    {/* <DropdownMenuItem asChild>
-                      <Link href="/my-courses">My Courses</Link>
-                    </DropdownMenuItem> */}
-
-                    <DropdownMenuSeparator />
-
-                    <DropdownMenuItem
-                      onClick={async () => {
-                        await deleteCookie("accessToken")
-                        window.location.reload();
-                      }}
+                <>
+                  {/* Saved Courses Icon */}
+                  <div className="relative inline-flex">
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      className="hover:bg-gray-100 rounded-full"
+                      asChild
                     >
-                      Logout
-                    </DropdownMenuItem>
-                  </DropdownMenuContent>
-                </DropdownMenu>
+                      <Link href="/dashboard/wishlist">
+                        <Bookmark className="h-5 w-5" />
+                      </Link>
+                    </Button>
+
+                    <span className="absolute -top-2 -right-1 z-10 flex h-5 w-5 items-center justify-center rounded-full bg-blue-600 text-xs font-medium text-white">
+                      {savedCount > 9 ? "9+" : savedCount}
+                    </span>
+                  </div>
+
+
+                  <DropdownMenu>
+                    <DropdownMenuTrigger asChild>
+                      <Button variant="outline" size="icon" className="rounded-full">
+                        <User className="h-5 w-5" />
+                      </Button>
+                    </DropdownMenuTrigger>
+
+                    <DropdownMenuContent align="end" className="w-48">
+                      <DropdownMenuLabel>{user?.name}</DropdownMenuLabel>
+                      <DropdownMenuSeparator />
+
+                     
+
+                      {
+                        user &&
+                        authenticatedRoutes[user?.role].map(route => (
+                          <DropdownMenuItem key={route.href} asChild>
+                            <Link href={route.href}>{route.name}</Link>
+                          </DropdownMenuItem>
+                        ))
+                      }
+
+                      <DropdownMenuSeparator />
+
+                      <DropdownMenuItem
+                      >
+                        Logout
+                      </DropdownMenuItem>
+                    </DropdownMenuContent>
+                  </DropdownMenu>
+                </>
               )}
             </div>
 
@@ -195,6 +202,25 @@ export default function PublicNavbar({ accessToken, user }: { accessToken: strin
                         {link.name}
                       </Link>
                     ))}
+
+                    {/* Wishlist in mobile navigation if logged in */}
+                    {accessToken && (
+                      <Link
+                        href="/wishlist"
+                        className={`flex items-center justify-between px-3 py-3 rounded-lg mb-1 ${pathname === "/wishlist"
+                          ? "bg-blue-50 text-blue-600"
+                          : "text-gray-700 hover:bg-gray-50"
+                          }`}
+                      >
+                        <span className="flex items-center gap-2">
+                          <Bookmark className="h-4 w-4" />
+                          Wishlist
+                        </span>
+                        <span className="flex h-6 w-6 items-center justify-center rounded-full bg-blue-600 text-xs font-medium text-white">
+                          {savedCount}
+                        </span>
+                      </Link>
+                    )}
                   </nav>
 
                   {/* Mobile Auth */}
@@ -210,21 +236,17 @@ export default function PublicNavbar({ accessToken, user }: { accessToken: strin
                       </div>
                     ) : (
                       <div className="space-y-3">
-                        <Button className="w-full" asChild>
-                          <Link href="/dashboard">Dashboard</Link>
-                        </Button>
-                        <Button className="w-full" asChild>
-                          <Link href="/profile">Profile</Link>
-                        </Button>
-
+                        {user &&
+                          authenticatedRoutes[user?.role].map(route => (
+                            <Button key={route.href} className="w-full" asChild>
+                              <Link href={route.href}>{route.name}</Link>
+                            </Button>
+                          ))
+                        }
 
                         <Button
                           variant="destructive"
                           className="w-full"
-                          onClick={async () => {
-                            await deleteCookie("accessToken")
-                            window.location.reload();
-                          }}
                         >
                           Logout
                         </Button>

@@ -1,8 +1,8 @@
 "use server";
 
+import { getCookie } from "@/lib/handleToken";
 import { serverFetch } from "@/lib/serverFetch";
 import { ICourse } from "@/types/course";
-import { getCookie } from "../user/getAllUser";
 
 // public
 export const getCourses = async (): Promise<ICourse[] | null> => {
@@ -20,7 +20,7 @@ export const getCourses = async (): Promise<ICourse[] | null> => {
 
         return result?.data || result || null;
     } catch (error) {
-        console.log("Error fetching user info:", error);
+        console.log("Error fetching user courses:", error);
         return null;
     }
 };

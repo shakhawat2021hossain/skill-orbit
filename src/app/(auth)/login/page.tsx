@@ -1,9 +1,10 @@
 import LoginForm from "@/components/auth/LoginForm";
 import Link from "next/link";
 
+export const dynamic = "force-dynamic";
+
+
 export default function LoginPage() {
-
-
     return (
         <div className="min-h-screen bg-linear-to-b from-blue-50 to-white py-12 px-4 sm:px-6 lg:px-8">
             <div className="max-w-md mx-auto">

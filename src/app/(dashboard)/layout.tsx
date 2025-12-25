@@ -1,4 +1,4 @@
-import DashboardSidebar from "@/components/dashboard/DashboardSidebar";
+import DashboardSidebar from "@/components/modules/dashboard/DashboardSidebar";
 import { getUserInfo } from "@/services/user/getUser";
 import { redirect } from "next/navigation";
 

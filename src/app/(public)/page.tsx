@@ -1,8 +1,8 @@
-import CTABanner from "@/components/home/CTA";
-import FeaturedCourses from "@/components/home/FeaturedCourses";
-import Hero from "@/components/home/Hero";
-import Testimonials from "@/components/home/Testimonials";
-import WhyChooseUs from "@/components/home/why";
+import CTABanner from "@/components/modules/home/CTA";
+import FeaturedCourses from "@/components/modules/home/FeaturedCourses";
+import Hero from "@/components/modules/home/Hero";
+import Testimonials from "@/components/modules/home/Testimonials";
+import WhyChooseUs from "@/components/modules/home/why";
 
 export default function Home() {
   return (
