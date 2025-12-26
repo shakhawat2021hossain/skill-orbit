@@ -65,6 +65,7 @@ export const ReviewModal: React.FC<ReviewModalProps> = ({
             const result = await addReview(data)
             console.log("res from modal", result)
             toast.success("Review added Successfully!")
+            setOpen(false)
         }
         catch(error){
             console.log("review posting failed", error)

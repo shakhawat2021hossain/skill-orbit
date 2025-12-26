@@ -43,15 +43,15 @@ const LoginForm = () => {
 
  
 
-    // useEffect(() => {
-    //     if (state.success) {
-    //         toast.success(state.message || "Login successful!");
-    //         router.push('/')
+    useEffect(() => {
+        if (state.success) {
+            toast.success(state.message || "Login successful!");
+            router.push('/')
             
-    //     } else if (state.message && !state.success) {
-    //         toast.error(state.message || "Login failed");
-    //     }
-    // }, [state]);
+        } else if (state.message && !state.success) {
+            toast.error(state.message || "Login failed");
+        }
+    }, [state]);
 
 
 

@@ -23,6 +23,7 @@ import {
 } from "lucide-react";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
+import LogoutButton from "@/components/shared/LogoutButton";
 
 interface DashboardSidebarProps {
   userRole: 'ADMIN' | 'INSTRUCTOR' | 'STUDENT';
@@ -49,7 +50,7 @@ export default function DashboardSidebar({ userRole, userName }: DashboardSideba
     const studentItems = [
       { label: "Dashboard", href: "/dashboard/student", icon: LayoutDashboard },
       // { label: "My Learning", href: "/dashboard/learning", icon: BookOpen },
-      { label: "Wishlist", href: "/dashboard/student/wishlist", icon: Star },
+      { label: "Wishlist", href: "/dashboard/wishlist", icon: Star },
       // { label: "Certificates", href: "/dashboard/certificates", icon: Award },
       { label: "My Courses", href: "/dashboard/my-course", icon: ShoppingBag },
       // { label: "Progress", href: "/dashboard/student/progress", icon: Clock },
@@ -77,17 +78,17 @@ export default function DashboardSidebar({ userRole, userName }: DashboardSideba
   const navItems = getNavItems();
 
   const isActive = (href: string) => {
-  // Dashboard should not match nested routes
-  if (
-    href === "/instructor/dashboard" ||
-    href === "/dashboard" ||
-    href === "/admin/dashboard"
-  ) {
-    return pathname === href;
-  }
+    // Dashboard should not match nested routes
+    if (
+      href === "/instructor/dashboard" ||
+      href === "/dashboard" ||
+      href === "/admin/dashboard"
+    ) {
+      return pathname === href;
+    }
 
-  return pathname === href || pathname.startsWith(href + "/");
-};
+    return pathname === href || pathname.startsWith(href + "/");
+  };
 
 
   return (
@@ -163,16 +164,7 @@ export default function DashboardSidebar({ userRole, userName }: DashboardSideba
               <span className="font-medium">Back to Home</span>
             </Link>
 
-            <Button
-              variant="ghost"
-              className="w-full justify-start text-red-600 hover:text-red-700 hover:bg-red-50"
-              asChild
-            >
-              <Link href="/logout">
-                <LogOut className="h-5 w-5 mr-3" />
-                Logout
-              </Link>
-            </Button>
+            <LogoutButton />
           </div>
         </div>
       </aside>
