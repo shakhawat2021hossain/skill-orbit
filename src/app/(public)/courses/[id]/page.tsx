@@ -15,6 +15,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { getCourse } from "@/services/course/getCourse";
 import EnrollButton from "@/components/modules/course/EnrollButton";
+import { getReviews } from "@/services/review/getReview";
 
 // Mock syllabus data since not in your JSON
 const mockSyllabus = [
@@ -58,6 +59,7 @@ export default async function CourseDetailsPage({
     const { id } = await params
 
     const course = await getCourse(id);
+    const reviews = await getReviews(id);
 
     if (!course) {
         return (
@@ -81,10 +83,6 @@ export default async function CourseDetailsPage({
     const totalHours = 8;
     const lessonCount = course.syllabus?.length || 0;
 
-
-    const onEnroll = () => {
-
-    }
 
     return (
         <div className="min-h-screen bg-gray-50">
@@ -198,6 +196,103 @@ export default async function CourseDetailsPage({
                                 </ul>
                             </CardContent>
                         </Card>
+
+                        {/* Reviews Section */}
+                        {
+                            reviews &&
+                            <Card>
+                                <CardContent className="p-6">
+                                    <div className="flex items-center justify-between mb-6">
+                                        <div>
+                                            <h2 className="text-2xl font-bold text-gray-900">
+                                                Student Reviews
+                                            </h2>
+                                            <p className="text-sm text-gray-500">
+                                                {reviews.length} reviews
+                                            </p>
+                                        </div>
+
+                                        {/* Optional: show only if enrolled & completed */}
+                                        {/* <ReviewModal courseId={course._id} /> */}
+                                    </div>
+
+                                    {/* Average Rating */}
+                                    {course.rating && (
+                                        <div className="flex items-center gap-4 mb-6">
+                                            <div className="text-4xl font-bold">
+                                                {course.rating.average.toFixed(1)}
+                                            </div>
+                                            <div>
+                                                <div className="flex">
+                                                    {[1, 2, 3, 4, 5].map((star) => (
+                                                        <span
+                                                            key={star}
+                                                            className={`text-xl ${star <= Math.round(course.rating.average)
+                                                                ? "text-yellow-400"
+                                                                : "text-gray-300"
+                                                                }`}
+                                                        >
+                                                            ★
+                                                        </span>
+                                                    ))}
+                                                </div>
+                                                <p className="text-sm text-gray-500">
+                                                    Based on {course.rating.count} reviews
+                                                </p>
+                                            </div>
+                                        </div>
+                                    )}
+
+                                    {/* Review List */}
+                                    <div className="space-y-6">
+                                        {reviews.length === 0 ? (
+                                            <p className="text-gray-500">
+                                                No reviews yet. Be the first to review this course.
+                                            </p>
+                                        ) : (
+                                            reviews.map((review) => (
+                                                <div
+                                                    key={review._id}
+                                                    className="border rounded-lg p-4"
+                                                >
+                                                    <div className="flex items-center justify-between mb-2">
+                                                        <div className="flex items-center gap-2">
+                                                            <div className="h-8 w-8 rounded-full bg-blue-100 flex items-center justify-center">
+                                                                <User className="h-4 w-4 text-blue-600" />
+                                                            </div>
+                                                            <span className="font-medium">
+                                                                {review.reviewer || "Student"}
+                                                            </span>
+                                                        </div>
+
+                                                        <div className="flex">
+                                                            {[1, 2, 3, 4, 5].map((star) => (
+                                                                <span
+                                                                    key={star}
+                                                                    className={`text-sm ${star <= review.rating
+                                                                        ? "text-yellow-400"
+                                                                        : "text-gray-300"
+                                                                        }`}
+                                                                >
+                                                                    ★
+                                                                </span>
+                                                            ))}
+                                                        </div>
+                                                    </div>
+
+                                                    {review.review && (
+                                                        <p className="text-gray-700 text-sm">
+                                                            {review.review}
+                                                        </p>
+                                                    )}
+                                                </div>
+                                            ))
+                                        )}
+                                    </div>
+                                </CardContent>
+                            </Card>
+                        }
+
 
                         {/* Tags */}
                         <Card>
