@@ -91,7 +91,7 @@ const CourseCard = ({ course }: { course: ICourse }) => {
                     </div>
                     <div className="flex items-center gap-1">
                         <Star className="h-3 w-3 text-yellow-500 fill-yellow-500" />
-                        {course?.rating || 4.8}
+                        {course?.rating.average || 4.8}
                     </div>
                 </div>
 

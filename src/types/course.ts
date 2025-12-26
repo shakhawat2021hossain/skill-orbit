@@ -46,7 +46,10 @@ export interface ICourse {
     totalDuration?: number;
     createdBy: string;
     students?: string[];
-    rating?: string;
+    rating: {
+        average: number;
+        count: number;
+    };
     isDeleted?: boolean;
     createdAt: string;
 }

@@ -15,9 +15,9 @@ export const getCourse = async (id: string): Promise<ICourse | null> => {
         }
 
         const result = await res.json();
-        console.log("enroll course", result.data[0]);
+        console.log("enroll course", result);
 
-        return result?.data[0] || result || null;
+        return result?.data || result || null;
     } catch (error) {
         console.log("Error fetching user course:", error);
         return null;

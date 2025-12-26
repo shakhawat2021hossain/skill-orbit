@@ -213,7 +213,7 @@ export default function PublicNavbar({
                           }`}
                       >
                         <span className="flex items-center gap-2">
-                          <Bookmark className="h-4 w-4" />
+                          <Bookmark className="h-8 w-8" />
                           Wishlist
                         </span>
                         <span className="flex h-6 w-6 items-center justify-center rounded-full bg-blue-600 text-xs font-medium text-white">

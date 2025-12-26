@@ -5,10 +5,13 @@ import { myCourses } from "@/services/course/myCourses";
 import { getMyCourseDeatils } from "@/services/student/getMyCourseDetails";
 import { Progress } from "@/components/ui/progress";
 import { Badge } from "@/components/ui/badge";
+import { ReviewModal } from "@/components/modules/review/ReviewModal";
+import { getUserInfo } from "@/services/user/getUser";
 
 const myCoursesPage = async () => {
     const courses = await myCourses() || [];
-    
+    const user = await getUserInfo()
+
     const getProgress = async (courseId: string) => {
         const data = await getMyCourseDeatils(courseId);
         return data?.enrollment?.progress || 0;
@@ -30,7 +33,7 @@ const myCoursesPage = async () => {
     };
 
     return (
-        <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white p-4 md:p-6">
+        <div className="min-h-screen bg-linear-to-b from-gray-50 to-white p-4 md:p-6">
             {/* Header */}
             <div className="mb-8">
                 <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
@@ -40,7 +43,7 @@ const myCoursesPage = async () => {
                             {courses.length} course{courses.length !== 1 ? 's' : ''} enrolled
                         </p>
                     </div>
-                    <Button asChild className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700">
+                    <Button asChild className="bg-linear-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700">
                         <Link href="/courses">
                             <Plus className="mr-2 h-4 w-4" />
                             Browse More Courses
@@ -95,7 +98,7 @@ const myCoursesPage = async () => {
                             <div>
                                 <p className="text-sm text-gray-500">Avg Progress</p>
                                 <p className="text-2xl font-bold text-gray-900">
-                                    {coursesWithProgress.length > 0 
+                                    {coursesWithProgress.length > 0
                                         ? Math.round(coursesWithProgress.reduce((sum, c) => sum + c.progress, 0) / coursesWithProgress.length)
                                         : 0}%
                                 </p>
@@ -110,14 +113,14 @@ const myCoursesPage = async () => {
 
             {courses.length === 0 ? (
                 <div className="max-w-2xl mx-auto py-16 text-center">
-                    <div className="bg-gradient-to-br from-blue-50 to-indigo-50 w-24 h-24 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <div className="bg-linear-to-br from-blue-50 to-indigo-50 w-24 h-24 rounded-full flex items-center justify-center mx-auto mb-6">
                         <BookOpen className="h-12 w-12 text-blue-600" />
                     </div>
                     <h2 className="text-3xl font-bold text-gray-900 mb-3">Start Your Learning Journey</h2>
                     <p className="text-gray-600 mb-8 max-w-md mx-auto">
                         You haven't enrolled in any courses yet. Browse our catalog and start learning today!
                     </p>
-                    <Button asChild size="lg" className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700">
+                    <Button asChild size="lg" className="bg-linear-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700">
                         <Link href="/courses">
                             <Plus className="mr-2 h-5 w-5" />
                             Browse Available Courses
@@ -129,8 +132,8 @@ const myCoursesPage = async () => {
                     {/* Courses Grid */}
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                         {coursesWithProgress.map((course) => (
-                            <div 
-                                key={course._id} 
+                            <div
+                                key={course._id}
                                 className="group bg-white rounded-2xl border border-gray-200 hover:border-blue-300 hover:shadow-xl transition-all duration-300 overflow-hidden"
                             >
                                 {/* Course Thumbnail */}
@@ -145,7 +148,7 @@ const myCoursesPage = async () => {
                                             ${course.price}
                                         </Badge>
                                     </div> */}
-                                    <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-4">
+                                    <div className="absolute bottom-0 left-0 right-0 bg-linear-to-t from-black/60 to-transparent p-4">
                                         <Badge className="bg-white/20 backdrop-blur-sm text-white border-0">
                                             {course.category}
                                         </Badge>
@@ -172,16 +175,16 @@ const myCoursesPage = async () => {
                                             <span className="font-semibold text-gray-900">{course.progress}%</span>
                                         </div>
                                         <div className="relative">
-                                            <Progress 
-                                                value={course.progress} 
+                                            <Progress
+                                                value={course.progress}
                                                 className="h-2"
                                             />
-                                            <div 
+                                            <div
                                                 className={`absolute top-0 left-0 h-2 rounded-full ${getProgressColor(course.progress)} transition-all duration-500`}
                                                 style={{ width: `${course.progress}%` }}
                                             />
                                         </div>
-                                        
+
                                         <div className="flex items-center gap-2 text-xs text-gray-500">
                                             <Clock className="h-3 w-3" />
                                             <span>Updated recently</span>
@@ -190,9 +193,9 @@ const myCoursesPage = async () => {
 
                                     {/* Action Buttons */}
                                     <div className="flex gap-2 mt-6">
-                                        <Button
+                                        {/* <Button
                                             asChild
-                                            className="flex-1 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700"
+                                            className="flex-1 bg-linear-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700"
                                         >
                                             <Link href={`/dashboard/my-course/${course._id}`}>
                                                 {course.progress === 0 ? (
@@ -212,7 +215,36 @@ const myCoursesPage = async () => {
                                                     </>
                                                 )}
                                             </Link>
+                                        </Button> */}
+                                        {/* Continue Button (always available) */}
+                                        <Button
+                                            asChild
+                                            className="flex-1 bg-linear-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700"
+                                        >
+                                            <Link href={`/dashboard/my-course/${course._id}`}>
+                                                {course.progress === 0 ? (
+                                                    <>
+                                                        <PlayCircle className="mr-2 h-4 w-4" />
+                                                        Start Learning
+                                                    </>
+                                                ) : (
+                                                    <>
+                                                        <ArrowRight className="mr-2 h-4 w-4" />
+                                                        Continue
+                                                    </>
+                                                )}
+                                            </Link>
                                         </Button>
+
+                                        {/* Review Button (only if course is completed) */}
+                                        {course.progress >= 100 && (
+                                            <ReviewModal
+                                                courseId={course._id}
+                                                studentId={user?._id as string} // Replace with actual logged-in student ID
+                                            // onReviewSubmitted={() => fetchReviews(course._id)} // optional: refresh reviews
+                                            />
+                                        )}
+
                                     </div>
                                 </div>
                             </div>
@@ -262,7 +294,7 @@ const myCoursesPage = async () => {
                                                         </div>
                                                         <div className="relative">
                                                             <Progress value={course.progress} className="h-1.5" />
-                                                            <div 
+                                                            <div
                                                                 className={`absolute top-0 left-0 h-1.5 rounded-full ${getProgressColor(course.progress)}`}
                                                                 style={{ width: `${course.progress}%` }}
                                                             />

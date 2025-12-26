@@ -28,7 +28,7 @@ import {
 import Image from 'next/image';
 import Link from 'next/link';
 import { removeFromWishlistAction } from '@/services/wishlist/removeFromWishlist';
-import { RemoveWishlistButton } from '@/components/modules/student/RemoveWishlist';
+import { RemoveWishlistButton } from '@/components/modules/wishlist/RemoveWishlist';
 
 const WishlistPage = async () => {
     const wishlistedCourses = await getWishlist();

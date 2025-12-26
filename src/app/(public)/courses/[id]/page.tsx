@@ -78,12 +78,12 @@ export default async function CourseDetailsPage({
         return hours > 0 ? `${hours}h ${mins}m` : `${mins}m`;
     };
 
-    const totalHours = Math.floor(course?.totalDuration || 10 / 60);
-    const lessonCount = 6; // Default lesson count
+    const totalHours = 8;
+    const lessonCount = course.syllabus?.length || 0;
 
 
-    const onEnroll = () =>{
-        
+    const onEnroll = () => {
+
     }
 
     return (
@@ -151,35 +151,38 @@ export default async function CourseDetailsPage({
                         </Card>
 
                         {/* Course Content */}
-                        <Card>
-                            <CardContent className="p-6">
-                                <h2 className="text-2xl font-bold text-gray-900 mb-6">
-                                    Course Content • {lessonCount} sections
-                                </h2>
+                        {
+                            course.syllabus && course.syllabus.length > 0 &&
+                            <Card>
+                                <CardContent className="p-6">
+                                    <h2 className="text-2xl font-bold text-gray-900 mb-6">
+                                        Course Content • {lessonCount} sections
+                                    </h2>
 
-                                <div className="space-y-3">
-                                    {mockSyllabus.map((lesson) => (
-                                        <div
-                                            key={lesson.id}
-                                            className="flex items-center justify-between p-4 border rounded-lg hover:bg-gray-50"
-                                        >
-                                            <div className="flex items-center">
-                                                <div className="h-8 w-8 rounded-full bg-blue-100 flex items-center justify-center mr-4">
-                                                    <BookOpen className="h-4 w-4 text-blue-600" />
+                                    <div className="space-y-3">
+                                        {course?.syllabus.map((lesson) => (
+                                            <div
+                                                key={lesson._id}
+                                                className="flex items-center justify-between p-4 border rounded-lg hover:bg-gray-50"
+                                            >
+                                                <div className="flex items-center">
+                                                    <div className="h-8 w-8 rounded-full bg-blue-100 flex items-center justify-center mr-4">
+                                                        <BookOpen className="h-4 w-4 text-blue-600" />
+                                                    </div>
+                                                    <div>
+                                                        <h3 className="font-medium">{lesson.title}</h3>
+                                                    </div>
                                                 </div>
-                                                <div>
-                                                    <h3 className="font-medium">{lesson.title}</h3>
+                                                <div className="flex items-center text-gray-500">
+                                                    <Clock className="h-4 w-4 mr-2" />
+                                                    {formatDuration(lesson?.duration || 6)}
                                                 </div>
                                             </div>
-                                            <div className="flex items-center text-gray-500">
-                                                <Clock className="h-4 w-4 mr-2" />
-                                                {formatDuration(lesson.duration)}
-                                            </div>
-                                        </div>
-                                    ))}
-                                </div>
-                            </CardContent>
-                        </Card>
+                                        ))}
+                                    </div>
+                                </CardContent>
+                            </Card>
+                        }
 
                         {/* Requirements */}
                         <Card>
@@ -218,8 +221,8 @@ export default async function CourseDetailsPage({
                             <CardContent className="p-6">
                                 <div className="aspect-video relative mb-6">
                                     <Image
-                                        src={course.thumbnail as string}
-                                        alt={course.title}
+                                        src={course?.thumbnail as string || "https://images.unsplash.com/photo-1627398242454-45a1465c2479?w=800&h=450&fit=crop"}
+                                        alt={course?.title || "image"}
                                         fill
                                         className="object-cover rounded-lg"
                                     />
@@ -260,13 +263,6 @@ export default async function CourseDetailsPage({
                                         <CheckCircle className="h-5 w-5 text-green-500" />
                                     </div>
 
-                                    <div className="flex items-center justify-between">
-                                        <div className="flex items-center">
-                                            <Download className="h-5 w-5 text-gray-400 mr-2" />
-                                            <span>Resources</span>
-                                        </div>
-                                        <span className="font-medium">{course.resources?.length || 0}</span>
-                                    </div>
                                 </div>
 
                                 <div className="mt-6 pt-6 border-t">
@@ -291,29 +287,6 @@ export default async function CourseDetailsPage({
                                     </ul>
                                 </div>
 
-                                {/* Resources */}
-                                {course.resources && course.resources.length > 0 && (
-                                    <div className="mt-6 pt-6 border-t">
-                                        <h3 className="font-bold text-gray-900 mb-3">Resources</h3>
-                                        <div className="space-y-2">
-                                            {course.resources.map((resource, index) => (
-                                                <a
-                                                    key={index}
-                                                    href={resource.link}
-                                                    target="_blank"
-                                                    rel="noopener noreferrer"
-                                                    className="flex items-center p-3 border rounded-lg hover:bg-gray-50"
-                                                >
-                                                    <Download className="h-4 w-4 text-blue-600 mr-3" />
-                                                    <div>
-                                                        <p className="font-medium text-sm">{resource.title}</p>
-                                                        <p className="text-xs text-gray-500">Click to download</p>
-                                                    </div>
-                                                </a>
-                                            ))}
-                                        </div>
-                                    </div>
-                                )}
                             </CardContent>
                         </Card>
 

@@ -214,7 +214,7 @@ export default function AdminCourseManagementPage() {
                                                     <div className="font-medium text-gray-900 truncate">{course.title}</div>
                                                     <div className="text-sm text-gray-500 flex items-center gap-2 mt-1">
                                                         <Star className="h-3 w-3 text-yellow-500 fill-yellow-500" />
-                                                        <span>{course.rating || 4.5}</span>
+                                                        <span>{course.rating.average || 4.5}</span>
                                                         <Clock className="h-3 w-3 ml-2" />
                                                         <span>{Math.floor((course.totalDuration || 0) / 60)}h</span>
                                                     </div>

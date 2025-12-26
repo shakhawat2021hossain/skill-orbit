@@ -82,7 +82,7 @@ export default function CourseStats({ course }: { course: ICourse }) {
             </div>
             <div>
               <p className="text-sm text-gray-500">Rating</p>
-              <p className="text-lg font-semibold">{course.rating || "N/A"}</p>
+              <p className="text-lg font-semibold">{course?.rating?.average || "N/A"}</p>
             </div>
           </CardContent>
         </Card>

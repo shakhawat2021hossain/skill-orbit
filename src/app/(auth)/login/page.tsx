@@ -1,4 +1,4 @@
-import LoginForm from "@/components/auth/LoginForm";
+import LoginForm from "@/components/modules/auth/LoginForm";
 import Link from "next/link";
 
 export const dynamic = "force-dynamic";

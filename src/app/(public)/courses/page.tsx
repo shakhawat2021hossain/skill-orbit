@@ -13,23 +13,7 @@ export default async function CoursesPage() {
 
     const courses = await getCourses();
 
-    // Mock categories for filtering
-    const categories = [
-        "All Categories",
-        "Web Development",
-        "Data Science",
-        "Mobile Development",
-        "UI/UX Design",
-        "Business",
-        "Marketing",
-        "Photography"
-    ];
-
-    // Mock popular tags
-    const popularTags = [
-        "React", "JavaScript", "Python", "Node.js", "AWS", "Machine Learning",
-        "Figma", "Swift", "Kotlin", "DevOps", "Blockchain", "Cybersecurity"
-    ];
+    
 
     return (
         <div className="min-h-screen bg-linear-to-b from-gray-50 to-white">
