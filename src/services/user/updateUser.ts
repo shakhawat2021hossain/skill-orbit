@@ -12,7 +12,7 @@ export const updateUser = async (
     payload: Partial<IUser>
 ): Promise<IResData<IUser> | null> => {
     try {
-        const token = await getCookie("accessToken");
+        const token = await getCookie("token");
 
         const res = await serverFetch.patch(`/user/${id}/update`, {
             headers: {

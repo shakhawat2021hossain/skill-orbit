@@ -17,7 +17,7 @@ export const updateLesson = async (
   payload: UpdateLessonPayload
 ): Promise<any | null> => {
   try {
-    const token = await getCookie("accessToken");
+    const token = await getCookie("token");
 
     const res = await serverFetch.patch(`/lesson/${courseId}/${lessonId}`, {
       headers: {

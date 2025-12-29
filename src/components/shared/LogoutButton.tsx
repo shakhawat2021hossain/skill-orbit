@@ -9,7 +9,7 @@ const LogoutButton = () => {
     return (
         <Button
             onClick={async () => {
-                await deleteCookie("accessToken")
+                await deleteCookie("token")
                 toast.success("Logout Successful")
 
             }}

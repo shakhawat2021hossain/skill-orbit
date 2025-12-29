@@ -5,7 +5,7 @@ import { serverFetch } from "@/lib/serverFetch";
 
 export const enrollCourse = async (courseId: string): Promise<any | null> => {
 	try {
-		const token = await getCookie("accessToken");
+		const token = await getCookie("token");
 
 		const res = await serverFetch.post(`/enrollment/${courseId}/enroll`, {
 			headers: {
@@ -35,7 +35,7 @@ export const updateProgress = async (
 	lessonId: string
 ): Promise<any | null> => {
 	try {
-		const token = await getCookie("accessToken");
+		const token = await getCookie("token");
 
 		const res = await serverFetch.patch(`/enrollment/${courseId}/progress/${lessonId}`, {
 			headers: {

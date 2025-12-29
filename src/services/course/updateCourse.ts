@@ -8,7 +8,7 @@ export const updateCourse = async (
   payload: Record<string, any>
 ): Promise<any | null> => {
   try {
-    const token = await getCookie("accessToken");
+    const token = await getCookie("token");
 
     const res = await serverFetch.patch(`/course/${courseId}`, {
       headers: {

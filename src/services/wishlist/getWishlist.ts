@@ -6,7 +6,7 @@ import { ICourse } from "@/types/course";
 
 export const getWishlist = async (): Promise<ICourse[] | null> => {
     try {
-        const token = await getCookie("accessToken");
+        const token = await getCookie("token");
 
         const res = await serverFetch.get(`/wishlist/get-all`, {
             headers: {

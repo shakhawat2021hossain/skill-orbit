@@ -8,7 +8,7 @@ export const deleteLesson = async (
   lessonId: string
 ): Promise<boolean> => {
   try {
-    const token = await getCookie("accessToken");
+    const token = await getCookie("token");
     // console.log("courseId", courseId, lessonId)
 
     const res = await serverFetch.delete(`/lesson/${courseId}/${lessonId}`, {

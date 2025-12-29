@@ -48,11 +48,11 @@ const authenticatedRoutes = {
 };
 
 export default function NavbarClient({
-    accessToken,
+    token,
     user,
     savedCount,
 }: {
-    accessToken: string | undefined;
+    token: string | undefined;
     user: IUser | null;
     savedCount: number;
 }) {
@@ -102,7 +102,7 @@ export default function NavbarClient({
                         <div className="flex items-center gap-4">
                             {/* Desktop Auth */}
                             <div className="hidden lg:flex items-center gap-3">
-                                {!accessToken ? (
+                                {!token ? (
                                     <Button
                                         className="bg-blue-600 hover:bg-blue-700 text-white"
                                         size="sm"
@@ -229,7 +229,7 @@ export default function NavbarClient({
                                                 </Link>
                                             ))}
 
-                                            {accessToken && (
+                                            {token && (
                                                 <Link
                                                     href="/wishlist"
                                                     className={
@@ -251,7 +251,7 @@ export default function NavbarClient({
 
                                         {/* Mobile Auth */}
                                         <div className="px-4 pt-6 border-t">
-                                            {!accessToken ? (
+                                            {!token ? (
                                                 <div className="space-y-3">
                                                     <Button className="w-full" asChild>
                                                         <Link href="/login">Log in</Link>

@@ -5,7 +5,7 @@ import { serverFetch } from "@/lib/serverFetch";
 import { IMyCourseDetails } from "@/types/course";
 
 export const getMyCourseDeatils = async (id: string): Promise<IMyCourseDetails | null> => {
-    const token = await getCookie("accessToken");
+    const token = await getCookie("token");
 
     try {
         const res = await serverFetch.get(`/enrollment/${id}`, {

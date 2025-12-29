@@ -8,7 +8,7 @@ import { IReview } from "@/types/review";
 
 export const addReview = async (payload: Partial<IReview>): Promise<IReview | null> => {
     try {
-        const token = await getCookie("accessToken");
+        const token = await getCookie("token");
 
         const res = await serverFetch.post("/review/add", {
             headers: {

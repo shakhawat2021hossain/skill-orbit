@@ -14,7 +14,7 @@ export const createLesson = async (
   payload: CreateLessonPayload
 ): Promise<any | null> => {
   try {
-    const token = await getCookie("accessToken");
+    const token = await getCookie("token");
 
     const res = await serverFetch.post(`/lesson/create/${courseId}`, {
       headers: {

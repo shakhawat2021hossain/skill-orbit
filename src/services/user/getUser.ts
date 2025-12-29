@@ -8,7 +8,7 @@ import { IUser } from "@/types/user";
 export const getUserInfo = async (): Promise<IUser | null> => {
     try {
         // Read access token
-        const token = await getCookie("accessToken");
+        const token = await getCookie("token");
 
         if (!token) {
             console.log("No access token found.");

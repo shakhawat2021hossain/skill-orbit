@@ -6,7 +6,7 @@ import { revalidateTag } from "next/cache";
 
 export const addToWishlist = async (courseId: string): Promise<any | null> => {
     try {
-        const token = await getCookie("accessToken");
+        const token = await getCookie("token");
 
         const res = await serverFetch.post(`/wishlist/${courseId}`, {
             headers: {

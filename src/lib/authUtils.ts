@@ -194,8 +194,9 @@ export function matchRoute(pathname: string, config: RouteConfig) {
 
 
 // get route owner
-export function getRouteOwner(pathname: string): "ADMIN" | "STUDENT" | "COMMON" | null {
+export function getRouteOwner(pathname: string): "ADMIN" | "INSTRUCTOR" | "STUDENT" | "COMMON" | null {
     if (matchRoute(pathname, routeGroups.ADMIN)) return "ADMIN";
+    if (matchRoute(pathname, routeGroups.INSTRUCTOR)) return "INSTRUCTOR";
     if (matchRoute(pathname, routeGroups.STUDENT)) return "STUDENT";
     if (matchRoute(pathname, routeGroups.COMMON)) return "COMMON";
     return null; // public
@@ -208,14 +209,14 @@ export function isAuthRoute(pathname: string) {
 
 // 
 export function getDefaultDashboardRoute(role: UserRole) {
-    if(role === UserRole.INSTRUCTOR) return "/instructor/dashboard"
+    if (role === UserRole.INSTRUCTOR) return "/instructor/dashboard"
     return role === UserRole.ADMIN ? "/admin/dashboard" : "/dashboard/student";
 }
 
 // the ultimate func for deciding
 export function canRoleAccessRoute(path: string, role: UserRole): boolean {
     const owner = getRouteOwner(path);
-    console.log("owner", owner)
+    console.log("owner(null-public, common-protected, stu/admin/instructor)", owner)
 
     if (owner === null) return true;        // public routes always allowed
     if (owner === "COMMON") return true;    // shared protected routes

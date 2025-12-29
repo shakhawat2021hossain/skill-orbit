@@ -30,7 +30,7 @@ export const getCourses = async (): Promise<ICourse[] | null> => {
 
 
 export const getCoursesForAdmin = async (): Promise<ICourse[] | null> => {
-    const token = await getCookie("accessToken");
+    const token = await getCookie("token");
 
     try {
         const res = await serverFetch.get("/course/for-admin", {

@@ -7,7 +7,7 @@ import { serverFetch } from "@/lib/serverFetch";
 
 export const addCourse = async (payload: any): Promise<any | null> => {
 	try {
-		const token = await getCookie("accessToken");
+		const token = await getCookie("token");
 
 		const res = await serverFetch.post("/course/create", {
 			headers: {

@@ -5,7 +5,7 @@ import { serverFetch } from "@/lib/serverFetch";
 import { IUser } from "@/types/user";
 
 export const getInsDetails = async (): Promise<IUser | null> => {
-    const token = await getCookie("accessToken");
+    const token = await getCookie("token");
 
     try {
         const res = await serverFetch.get(`/user/details`, {

@@ -6,7 +6,7 @@ import { serverFetch } from "@/lib/serverFetch";
 
 export const removeFromWishlist = async (courseId: string): Promise<boolean> => {
     try {
-        const token = await getCookie("accessToken");
+        const token = await getCookie("token");
 
         const res = await serverFetch.delete(`/wishlist/${courseId}`, {
             headers: {
