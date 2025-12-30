@@ -75,7 +75,7 @@ export default function NavbarClient({
                         {/* Logo */}
                         <div className="flex items-center gap-3">
                             <Link href="/" className="flex items-center gap-3">
-                                <div className="text-xl font-bold">skillorbit</div>
+                                <div className="text-xl font-bold">Skill Orbit</div>
                             </Link>
 
                             {/* Desktop Navigation */}
