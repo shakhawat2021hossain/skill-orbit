@@ -1,36 +1,129 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🎓 SkillOrbit
 
-## Getting Started
+SkillOrbit is a **modern Learning Management System (LMS)** built to manage courses, students, instructors, and learning progress efficiently.  
+It provides **role-based dashboards**, **secure authentication**, and a **scalable full-stack architecture** using modern web technologies.
 
-First, run the development server:
+---
+
+## 🌐 Live Demo
+
+Check out the live version of **SkillOrbit** here:  
+[🔗 Visit Live Site](https://skill-orbit-frontend.vercel.app/)
+
+---
+
+## 🚀 Features
+
+### 👩‍🎓 Student
+- Personalized student dashboard
+- Enroll in courses
+- Track learning progress
+- Wishlist courses
+- View course content & milestones
+
+### 👨‍🏫 Instructor
+- Instructor dashboard
+- Create & manage courses
+- Track enrolled students
+- Course analytics & performance insights
+
+### 🛡️ Admin
+- Admin dashboard
+- Manage users & roles
+- Approve or moderate courses
+- Platform analytics & monitoring
+
+### 🔐 Authentication & Authorization
+- JWT-based authentication
+- Role-based route protection
+- Secure middleware handling
+- Protected server & client routes
+
+---
+
+## 🧱 Tech Stack
+
+### Frontend
+- **Next.js (App Router)**
+- **React**
+- **TypeScript**
+- **Tailwind CSS**
+- **shadcn/ui**
+- **Lucide Icons**
+- **React Hook Form**
+- **Redux Toolkit**
+
+### Backend
+- **Node.js**
+- **Express.js**
+- **JWT Authentication**
+- **REST API Architecture**
+
+### Database
+- **MongoDB**
+- **Mongoose**
+- **PostgreSQL (Optional / Extended)**
+- **Prisma ORM**
+
+### Utilities & Services
+- **Nodemailer** – Email notifications
+- **Cloudinary** – Image & media uploads
+- **Middleware-based Route Guards**
+- **Server Actions & SSR**
+
+---
+
+## 📂 Project Structure
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+SkillOrbit/
+├── app/                  # Next.js App Router
+│   ├── (auth)/            # Authentication routes
+│   ├── dashboard/         # Role-based dashboards
+│   ├── courses/           # Course pages
+│   └── api/               # API routes
+│
+├── components/            # Reusable UI components
+├── lib/                   # Helpers, auth utils, fetchers
+├── hooks/                 # Custom React hooks
+├── store/                 # Redux store & slices
+├── types/                 # TypeScript types
+├── middleware.ts          # Route protection
+├── public/                # Static assets
+└── README.md
+
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🧪 Future Improvements
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- Certificate generation
+- Live classes & streaming
+- AI-based course recommendations
+- Mobile app support
 
-## Learn More
+## 🤝 Contributing
 
-To learn more about Next.js, take a look at the following resources:
+Contributions are welcome!  
+Feel free to **fork** the repository and submit a **pull request**.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 📜 License
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+This project is licensed under the **MIT License**.
 
-## Deploy on Vercel
+## 👤 Author
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+**Shakhawat Hossain**  
+Full Stack Web Developer  
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+> If you like this project, don’t forget to ⭐ star the repository!
+
+## 📬 Contact
+
+For queries or collaboration:
+
+- GitHub: [https://github.com/shakhawat2021hossain](https://github.com/shakhawat2021hossain)  
+- Email: shakhawat.hossain.web@gmail.com
+
+
