@@ -1,7 +1,7 @@
-// app/admin/users/UserTableClient.tsx
+
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
@@ -45,7 +45,6 @@ import {
     Shield
 } from "lucide-react";
 
-import { UserRole, IUser } from "@/types/user";
 import { updateUser } from "@/services/user/updateUser";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { AlertDialogFooter } from "@/components/ui/alert-dialog";
@@ -54,12 +53,46 @@ interface Props {
     initialUsers: IUser[];
 }
 
-export default function UsersTable({ initialUsers }: Props) {
-    const [users, setUsers] = useState<IUser[]>(initialUsers);
+import { IUser, UserRole } from "@/types/user";
+import { getUsers } from "@/services/user/getAllUser";
+
+// ... your other imports remain same
+
+interface Props {
+    initialUsers: IUser[];
+    initialMeta?: {
+        page: number;
+        limit: number;
+        total: number;
+    };
+}
+
+export default function UsersTable({ initialUsers, initialMeta }: Props) {
+    const [users, setUsers] = useState(initialUsers);
+    const [page, setPage] = useState(initialMeta?.page ?? 1);
+    const [limit] = useState(initialMeta?.limit ?? 10);
+    const [total, setTotal] = useState(initialMeta?.total ?? users.length);
+    const [loading, setLoading] = useState(false);
+
+    const totalPages = Math.ceil(total / limit);
+
+    const loadPage = async (newPage: number) => {
+        setLoading(true);
+        const res = await getUsers(newPage, limit);
+        if (res?.data) {
+            setUsers(res.data);
+            setTotal(res.meta.total);
+            setPage(res.meta.page);
+        }
+        setLoading(false);
+    };
+
+    useEffect(() => {
+        // already loaded first page
+    }, []);
     const [searchTerm, setSearchTerm] = useState("");
     const [roleFilter, setRoleFilter] = useState<string>("all");
     const [statusFilter, setStatusFilter] = useState<string>("all");
-    const [loading, setLoading] = useState(false);
 
     const [roleDialog, setRoleDialog] = useState<{
         open: boolean;
@@ -151,13 +184,13 @@ export default function UsersTable({ initialUsers }: Props) {
         }
     };
 
-    if (loading) {
-        return (
-            <div className="flex items-center justify-center py-20">
-                <Loader2 className="h-8 w-8 animate-spin text-blue-600" />
-            </div>
-        );
-    }
+    // if (loading) {
+    //     return (
+    //         <div className="flex items-center justify-center py-20">
+    //             <Loader2 className="h-8 w-8 animate-spin text-blue-600" />
+    //         </div>
+    //     );
+    // }
 
     return (
         <>
@@ -352,6 +385,36 @@ export default function UsersTable({ initialUsers }: Props) {
                     </AlertDialogFooter>
                 </DialogContent>
             </Dialog>
+            <div className="flex items-center justify-between mt-4">
+                <p className="text-sm text-gray-600">
+                    Page {page} of {totalPages} • {total} users
+                </p>
+
+                <div className="flex gap-2">
+                    <Button
+                        variant="outline"
+                        disabled={page === 1 || loading}
+                        onClick={() => loadPage(page - 1)}
+                    >
+                        Previous
+                    </Button>
+
+                    <Button
+                        variant="outline"
+                        disabled={page === totalPages || loading}
+                        onClick={() => loadPage(page + 1)}
+                    >
+                        Next
+                    </Button>
+                </div>
+            </div>
+            {loading && (
+                <div className="absolute inset-0 bg-white/60 flex items-center justify-center">
+                    <Loader2 className="h-6 w-6 animate-spin" />
+                </div>
+            )}
+
+
         </>
     );
 }

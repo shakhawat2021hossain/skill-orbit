@@ -34,9 +34,18 @@ export const loginAction = async (_: any, formData: FormData): Promise<any> => {
 
 
 
+    console.log("login", res)
 
     const result = await res.json();
     console.log("login", result)
+
+    if (!res.ok) {
+        return {
+            success: false,
+            message: result?.message || "Login failed"
+        };
+    }
+
 
 
     const cookieStore = await cookies()
@@ -54,46 +63,3 @@ export const loginAction = async (_: any, formData: FormData): Promise<any> => {
 
 
 
-
-// let accessTokenObject: null | any = null;
-// const tokens = res.headers.getSetCookie()
-// const parsedCookie = parse(tokens[0]);
-
-// if (parsedCookie['accessToken']) {
-//     accessTokenObject = parsedCookie;
-// }
-// console.log("accessToken", parsedCookie.accessToken)
-// await setCookie("accessToken", result.data.accessToken, {
-//     httpOnly: true,
-//     secure: true,
-//     maxAge: 24 * 60 * 60, // 24 hours in seconds
-//     sameSite: "none",
-// });
-// await setCookie("accessToken", result.data.accessToken, {
-//     httpOnly: true,
-//     secure: process.env.NODE_ENV === "production",
-//     maxAge: 60 * 60 * 24,
-//     sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
-//     path: "/",
-// });
-
-
-
-// await setCookie("accessToken", accessTokenObject.accessToken, {
-//     secure: true,
-//     httpOnly: true,
-//     maxAge: parseInt(accessTokenObject['Max-Age']) || 7 * 24 * 60 * 60 * 1000,
-//     path: accessTokenObject.Path || "/",
-//     sameSite: accessTokenObject['SameSite'] || "none",
-// });
-
-
-
-// await setCookie("accessToken", result.data.accessToken, {
-//     httpOnly: true,
-//     secure: true,
-//     sameSite: "none",
-//     path: "/",
-//     maxAge: 7 * 24 * 60 * 60 * 1000,
-
-// });

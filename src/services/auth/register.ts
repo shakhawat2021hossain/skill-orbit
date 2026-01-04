@@ -35,6 +35,12 @@ export async function registerAction(prevState: any, formData: FormData) {
 
         // Backend response
         const result = await res.json();;
+        if (!res.ok) {
+            return {
+                success: false,
+                message: result?.message || "Register failed"
+            };
+        }
 
 
         // console.log("result:", result);

@@ -1,20 +1,23 @@
 import UsersTable from "@/components/modules/admin/UsersTable";
 import { getUsers } from "@/services/user/getAllUser";
-import { IUser } from "@/types/user";
 
 export default async function AdminUserManagementPage() {
-  const users = await getUsers();
+  const res = await getUsers(1, 10);
 
   return (
     <div className="min-h-screen bg-gray-50 p-4 md:p-6">
       <div className="max-w-7xl mx-auto">
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-gray-900">User Management</h1>
-          <p className="text-gray-600 mt-1">Manage all users on the platform</p>
+          <p className="text-gray-600 mt-1">
+            Manage all users on the platform
+          </p>
         </div>
 
-        {/* Pass users as props to client table */}
-        <UsersTable initialUsers={users as IUser[]} />
+        <UsersTable
+          initialUsers={res?.data ?? []}
+          initialMeta={res?.meta}
+        />
       </div>
     </div>
   );
