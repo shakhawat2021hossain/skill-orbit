@@ -42,7 +42,7 @@ export const loginAction = async (_: any, formData: FormData): Promise<any> => {
     const cookieStore = await cookies()
     cookieStore.set({
         name: 'token',
-        value: result.data.token,
+        value: result.data.accessToken,
         httpOnly: true,
         secure: true,
         maxAge: 7 * 24 * 60 * 60, // 7 days in seconds
