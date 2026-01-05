@@ -52,7 +52,7 @@ import {
     FileText,
     RotateCcw
 } from "lucide-react";
-import { ICourse } from "@/types/course";
+import { Category, ICourse } from "@/types/course";
 import { updateDeleteOperation } from "@/services/course/deleteCourse";
 import { getCoursesForAdmin } from "@/services/course/getCourses";
 
@@ -157,7 +157,7 @@ export default function AdminCourseManagementPage() {
                             <SelectContent>
                                 <SelectItem value="all">All Categories</SelectItem>
                                 {categories.map(category => (
-                                    <SelectItem key={category} value={category}>
+                                    <SelectItem key={category} value={category as Category}>
                                         {category}
                                     </SelectItem>
                                 ))}

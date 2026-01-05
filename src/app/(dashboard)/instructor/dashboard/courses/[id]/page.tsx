@@ -82,12 +82,14 @@ export default async function InstructorCourseDetailsPage({
                             </div>
 
                             {/* Add Edit Button Here */}
-                            <EditCourseModal course={course}>
-                                <Button size="sm" className="gap-2">
-                                    <Pencil className="h-4 w-4" />
-                                    Edit Course
-                                </Button>
-                            </EditCourseModal>
+                            {course.category && (
+                                <EditCourseModal course={course as any}>
+                                    <Button size="sm" className="gap-2">
+                                        <Pencil className="h-4 w-4" />
+                                        Edit Course
+                                    </Button>
+                                </EditCourseModal>
+                            )}
                         </CardHeader>
                         <CardContent className="space-y-6">
                             <div className="grid md:grid-cols-2 gap-8">

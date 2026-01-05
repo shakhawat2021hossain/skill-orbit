@@ -42,7 +42,7 @@ export interface ICourse {
     thumbnail?: string;
     tags?: string[];
     syllabus?: ILesson[];
-    isPublished?: boolean;
+    isPublished: boolean;
     totalDuration?: number;
     createdBy: string;
     students?: string[];
@@ -74,6 +74,7 @@ export interface IEnrollment {
     progress: number;
     paymentStatus: "PAID" | "UNPAID";
     completedLessons: string[];
+    amountPaid?: number;
     createdAt: string;
     updatedAt: string;
 }
