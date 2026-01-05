@@ -5,25 +5,37 @@ import { serverFetch } from "@/lib/serverFetch";
 import { ICourse } from "@/types/course";
 
 // public
-export const getCourses = async (): Promise<ICourse[] | null> => {
+
+export interface ICourseApiResponse {
+    data: ICourse[];
+    meta: {
+        page: number;
+        limit: number;
+        total: number;
+    };
+}
+
+export const getCourses = async (
+    page = 1,
+    limit = 3
+): Promise<ICourseApiResponse | null> => {
     try {
-        const res = await serverFetch.get("/course/all");
-        // console.log(" res", res);
+        const res = await serverFetch.get(
+            `/course/all?page=${page}&limit=${limit}`
+        );
 
         if (!res.ok) {
             console.log("courses fetch failed");
             return null;
         }
 
-        const result = await res.json();
-        // console.log("course res", result);
-
-        return result?.data || result || null;
+        return await res.json();
     } catch (error) {
-        console.log("Error fetching user courses:", error);
+        console.log("Error fetching courses:", error);
         return null;
     }
 };
+
 
 
 

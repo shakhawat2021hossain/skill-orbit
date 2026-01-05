@@ -8,6 +8,7 @@ export async function registerAction(prevState: any, formData: FormData) {
         name: formData.get("name"),
         email: formData.get("email"),
         password: formData.get("password"),
+        role: formData.get("role")
     };
 
     // Validate with Zod
