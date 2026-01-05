@@ -6,20 +6,13 @@ import {
   BarChart3,
   BookOpen,
   Home,
-  LogOut,
   Menu,
   Plus,
-  Settings,
   Users,
   X,
-  Award,
   LayoutDashboard,
-  FileText,
   ShoppingBag,
-  UserCircle,
-  Clock,
   Star,
-  Shield,
 } from "lucide-react";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
@@ -43,8 +36,8 @@ export default function DashboardSidebar({ userRole, userName }: DashboardSideba
       { label: "My Courses", href: "/instructor/dashboard/courses", icon: BookOpen },
       { label: "Create Course", href: "/instructor/dashboard/add-course", icon: Plus },
       { label: "Enrollments", href: "/instructor/dashboard/enrollments", icon: Users },
-      { label: "Analytics", href: "/instructor/dashboard/analytics", icon: BarChart3 },
-      { label: "Reviews", href: "/instructor/dashboard/reviews", icon: Star },
+      // { label: "Analytics", href: "/instructor/dashboard/analytics", icon: BarChart3 },
+      // { label: "Reviews", href: "/instructor/dashboard/reviews", icon: Star },
     ];
 
     const studentItems = [

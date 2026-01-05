@@ -34,7 +34,7 @@ export interface ICourse {
     title: string;
     description: string;
     price: number;
-    category: Category;
+    category?: Category;
     instructor: string;
     introVideo?: string;
     resources?: TResource[]
@@ -42,7 +42,7 @@ export interface ICourse {
     thumbnail?: string;
     tags?: string[];
     syllabus?: ILesson[];
-    isPublished: boolean;
+    isPublished?: boolean;
     totalDuration?: number;
     createdBy: string;
     students?: string[];

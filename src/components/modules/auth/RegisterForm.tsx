@@ -13,6 +13,7 @@ import {
     FormDescription,
 } from "@/components/ui/form";
 import { Eye, EyeOff, Mail, Lock, User, ArrowRight, CheckCircle } from "lucide-react";
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { RegisterFormData, registerSchema } from "@/types/auth";
 import { useForm } from "react-hook-form";
@@ -30,7 +31,8 @@ export default function RegisterForm() {
         defaultValues: {
             name: "",
             email: "",
-            password: ""
+            password: "",
+            role: "STUDENT"
         },
     });
 
@@ -143,6 +145,31 @@ export default function RegisterForm() {
                     />
 
 
+
+                    <FormField
+                        control={form.control}
+                        name="role"
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel>Account type</FormLabel>
+                                <FormControl>
+                                    <div>
+                                        <Tabs defaultValue={field.value || "STUDENT"} onValueChange={field.onChange}>
+                                            <TabsList className="w-full">
+                                                <TabsTrigger value="STUDENT">Student</TabsTrigger>
+                                                <TabsTrigger value="INSTRUCTOR">Instructor</TabsTrigger>
+                                            </TabsList>
+                                        </Tabs>
+                                        <input type="hidden" {...field} />
+                                    </div>
+                                </FormControl>
+                                <FormDescription>Choose a role to continue</FormDescription>
+                                <FormMessage>
+                                    {state?.errors?.role?.[0]}
+                                </FormMessage>
+                            </FormItem>
+                        )}
+                    />
 
                     <Button
                         type="submit"

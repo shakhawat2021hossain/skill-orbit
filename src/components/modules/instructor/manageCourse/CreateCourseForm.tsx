@@ -200,6 +200,8 @@ export default function CreateCourse() {
                                                         ))}
                                                     </SelectContent>
                                                 </Select>
+                                                {/* hidden input to include category in native FormData */}
+                                                <input type="hidden" {...field} />
                                                 <FormMessage className="text-red-600" />
                                             </FormItem>
                                         )}

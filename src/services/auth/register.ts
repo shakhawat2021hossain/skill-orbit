@@ -13,6 +13,7 @@ export async function registerAction(prevState: any, formData: FormData) {
 
     // Validate with Zod
     const parsed = registerSchema.safeParse(rawFormData);
+    console.log(parsed)
 
     if (!parsed.success) {
         return {
