@@ -1,10 +1,10 @@
-import { 
-  BookOpen, 
-  Users, 
-  DollarSign, 
-  TrendingUp, 
-  Star, 
-  Clock, 
+import {
+  BookOpen,
+  Users,
+  DollarSign,
+  TrendingUp,
+  Star,
+  Clock,
   MessageSquare,
   BarChart3,
   Plus,
@@ -23,6 +23,7 @@ import { Progress } from "@/components/ui/progress";
 import { Badge } from "@/components/ui/badge";
 import Link from "next/link";
 import { getInsDetails } from "@/services/instructor/instructorDetails";
+import { getUserMetadata } from "@/services/metadata/userData";
 
 // Mock data for instructor
 const mockData = {
@@ -60,7 +61,9 @@ const mockData = {
 
 export default async function InstructorDashboardHome() {
   const details = await getInsDetails()
+  const meta = await getUserMetadata()
   console.log(details)
+  console.log(meta)
   return (
     <div className="min-h-screen bg-linear-to-b from-gray-50 to-white p-4 md:p-6 lg:p-8">
       {/* Welcome Header */}
@@ -95,7 +98,7 @@ export default async function InstructorDashboardHome() {
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-sm text-blue-600">Total Revenue</p>
-                  <p className="text-2xl font-bold text-gray-900">${mockData.stats.totalRevenue.toLocaleString()}</p>
+                  <p className="text-2xl font-bold text-gray-900">${meta.income?.total.toLocaleString() || 0}</p>
                   <div className="flex items-center gap-1 text-sm text-green-600 mt-1">
                     <TrendingUp className="h-4 w-4" />
                     +12.5% from last month
@@ -113,7 +116,7 @@ export default async function InstructorDashboardHome() {
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-sm text-green-600">Total Students</p>
-                  <p className="text-2xl font-bold text-gray-900">{mockData.stats.totalStudents}</p>
+                  <p className="text-2xl font-bold text-gray-900">{meta.students || 0}</p>
                 </div>
                 <div className="p-3 bg-white/50 rounded-full">
                   <Users className="h-6 w-6 text-green-600" />
@@ -128,15 +131,32 @@ export default async function InstructorDashboardHome() {
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-sm text-purple-600">Avg Rating</p>
-                  <p className="text-2xl font-bold text-gray-900">{mockData.stats.avgRating}</p>
+                  <p className="text-2xl font-bold text-gray-900">{meta.rating?.average}</p>
                   <div className="flex items-center mt-1">
                     {[...Array(5)].map((_, i) => (
-                      <Star key={i} className={`h-4 w-4 ${i < Math.floor(mockData.stats.avgRating) ? 'text-yellow-500 fill-yellow-500' : 'text-gray-300'}`} />
+                      <Star key={i} className={`h-4 w-4 ${i < Math.floor(meta.rating?.average) ? 'text-yellow-500 fill-yellow-500' : 'text-gray-300'}`} />
                     ))}
                   </div>
                 </div>
                 <div className="p-3 bg-white/50 rounded-full">
                   <Star className="h-6 w-6 text-purple-600" />
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card className="border-0 shadow-sm bg-linear-to-br from-blue-50 to-indigo-50">
+            <CardContent className="p-6">
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-sm text-blue-600">Total Reviews</p>
+                  <p className="text-2xl font-bold text-gray-900">{meta.rating?.totalReviews}</p>
+                  <p className="text-xs text-gray-500 mt-1">
+                    Customer Reviews
+                  </p>
+                </div>
+                <div className="p-3 bg-white/50 rounded-full">
+                  <MessageSquare className="h-6 w-6 text-blue-600" />
                 </div>
               </div>
             </CardContent>
@@ -162,7 +182,7 @@ export default async function InstructorDashboardHome() {
         {/* Left Column - Courses & Revenue */}
         <div className="lg:col-span-2 space-y-6">
           {/* Top Performing Courses */}
-          <Card className="border-0 shadow-lg">
+          {/* <Card className="border-0 shadow-lg">
             <CardHeader className="pb-3">
               <div className="flex items-center justify-between">
                 <div>
@@ -219,10 +239,10 @@ export default async function InstructorDashboardHome() {
                 ))}
               </div>
             </CardContent>
-          </Card>
+          </Card> */}
 
           {/* Recent Revenue & Analytics */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {/* <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <Card className="border-0 shadow-lg">
               <CardHeader className="pb-3">
                 <CardTitle className="flex items-center gap-2 text-sm">
@@ -242,7 +262,7 @@ export default async function InstructorDashboardHome() {
                   <div className="h-48 flex items-end justify-between gap-1">
                     {[40, 65, 75, 60, 85, 90, 100, 80, 95, 70, 85, 95].map((height, i) => (
                       <div key={i} className="flex-1 flex flex-col items-center">
-                        <div 
+                        <div
                           className="w-full bg-linear-to-t from-blue-500 to-blue-600 rounded-t-lg"
                           style={{ height: `${height}%` }}
                         />
@@ -289,13 +309,13 @@ export default async function InstructorDashboardHome() {
                 </div>
               </CardContent>
             </Card>
-          </div>
+          </div> */}
         </div>
 
         {/* Right Column */}
         <div className="space-y-6">
           {/* Recent Enrollments */}
-          <Card className="border-0 shadow-lg">
+          {/* <Card className="border-0 shadow-lg">
             <CardHeader className="pb-3">
               <div className="flex items-center justify-between">
                 <div>
@@ -331,10 +351,10 @@ export default async function InstructorDashboardHome() {
                 </Button>
               </div>
             </CardContent>
-          </Card>
+          </Card> */}
 
           {/* Recent Reviews */}
-          <Card className="border-0 shadow-lg">
+          {/* <Card className="border-0 shadow-lg">
             <CardHeader className="pb-3">
               <CardTitle className="flex items-center gap-2">
                 <Star className="h-5 w-5 text-amber-600" />
@@ -377,10 +397,10 @@ export default async function InstructorDashboardHome() {
                 </Button>
               </div>
             </CardContent>
-          </Card>
+          </Card> */}
 
           {/* Upcoming Tasks */}
-          <Card className="border-0 shadow-lg">
+          {/* <Card className="border-0 shadow-lg">
             <CardHeader className="pb-3">
               <CardTitle className="flex items-center gap-2">
                 <Calendar className="h-5 w-5 text-purple-600" />
@@ -394,7 +414,7 @@ export default async function InstructorDashboardHome() {
                     <div className="flex-1 min-w-0">
                       <h4 className="font-medium text-sm text-gray-900">{task.task}</h4>
                       <div className="flex items-center gap-2 mt-1">
-                        <Badge 
+                        <Badge
                           variant={task.priority === 'high' ? 'destructive' : task.priority === 'medium' ? 'default' : 'outline'}
                           className="text-xs"
                         >
@@ -415,7 +435,7 @@ export default async function InstructorDashboardHome() {
                 </Button>
               </div>
             </CardContent>
-          </Card>
+          </Card> */}
         </div>
       </div>
     </div>
