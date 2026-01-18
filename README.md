@@ -51,7 +51,6 @@ Check out the live version of **SkillOrbit** here:
 - **shadcn/ui**
 - **Lucide Icons**
 - **React Hook Form**
-- **Redux Toolkit**
 
 ### Backend
 - **Node.js**
@@ -62,8 +61,6 @@ Check out the live version of **SkillOrbit** here:
 ### Database
 - **MongoDB**
 - **Mongoose**
-- **PostgreSQL (Optional / Extended)**
-- **Prisma ORM**
 
 ### Utilities & Services
 - **Nodemailer** – Email notifications
@@ -72,6 +69,13 @@ Check out the live version of **SkillOrbit** here:
 - **Server Actions & SSR**
 
 ---
+
+### Admin Credentials
+- Email: admin@skillorbit.com
+- Password: Admin123%$
+
+---
+
 
 ## 📂 Project Structure
 
