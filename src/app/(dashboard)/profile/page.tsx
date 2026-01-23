@@ -302,8 +302,9 @@ export default function ProfileManagementPage() {
                     Change Password
                   </Button>
                 </ChangePasswordModal>
-                
-                <Button variant="outline" className="w-full justify-start gap-2">
+
+                {/* WORK HERE */}
+                {/* <Button variant="outline" className="w-full justify-start gap-2">
                   <ShieldCheck className="h-4 w-4" />
                   Two-Factor Authentication
                 </Button>
@@ -311,7 +312,7 @@ export default function ProfileManagementPage() {
                 <Button variant="outline" className="w-full justify-start gap-2">
                   <Globe className="h-4 w-4" />
                   Login Activity
-                </Button>
+                </Button> */}
               </CardContent>
             </Card>
 

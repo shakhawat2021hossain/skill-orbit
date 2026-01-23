@@ -13,7 +13,7 @@ export const getUserMetadata = async (): Promise<any | null> => {
                 ...(token ? { Authorization: `${token}` } : {}),
             },
         });
-        console.log(" res", res);
+        // console.log(" res", res);
 
         if (!res.ok) {
             console.log("user metadata fetch failed");
@@ -21,7 +21,7 @@ export const getUserMetadata = async (): Promise<any | null> => {
         }
 
         const result = await res.json();
-        console.log("course res", result);
+        // console.log("course res", result);
 
         return result?.data || result || null;
     } catch (error) {
