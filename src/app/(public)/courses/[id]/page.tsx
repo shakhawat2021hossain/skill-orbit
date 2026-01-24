@@ -17,15 +17,6 @@ import { getCourse } from "@/services/course/getCourse";
 import EnrollButton from "@/components/modules/course/EnrollButton";
 import { getReviews } from "@/services/review/getReview";
 
-// Mock syllabus data since not in your JSON
-const mockSyllabus = [
-    { id: 1, title: "Introduction to Web Development", duration: 120 },
-    { id: 2, title: "HTML & CSS Fundamentals", duration: 180 },
-    { id: 3, title: "JavaScript Basics", duration: 240 },
-    { id: 4, title: "React Fundamentals", duration: 300 },
-    { id: 5, title: "Node.js & Express", duration: 240 },
-    { id: 6, title: "MongoDB Database", duration: 180 },
-];
 
 // Mock whatYoullLearn data since not in your JSON
 const mockWhatYoullLearn = [

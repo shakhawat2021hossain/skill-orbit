@@ -150,6 +150,8 @@ export default async function AdminDashboardHome() {
             </CardContent>
           </Card>
         </div>
+
+        {/* WORK HERE: Realtime chart */}
       </div>
     </div>
   );

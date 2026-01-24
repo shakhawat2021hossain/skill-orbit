@@ -1,7 +1,5 @@
 import { Button } from "@/components/ui/button";
-import {
-    Filter,
-} from "lucide-react";
+import { Filter,} from "lucide-react";
 import { getCourses } from "@/services/course/getCourses";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Courses from "@/components/modules/course/Courses";

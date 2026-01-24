@@ -39,9 +39,6 @@ import {
 import {
     Search,
     MoreVertical,
-    BookOpen,
-    DollarSign,
-    Users,
     Star,
     Clock,
     Trash2,
